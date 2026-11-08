@@ -102,14 +102,40 @@ function pageApi(cdp, targetId, sessionId) {
   const send = (method, params) => cdp.send(method, params, sessionId);
   const problems = []; // lỗi JS và lỗi tải tài nguyên trong lần mở trang gần nhất
   const waiters = new Set();
+  let urlMap = null; // { from, to }: request tới `from...` được trả bằng nội dung lấy từ `to...`
+
+  // Trả request bằng nội dung lấy từ server cục bộ (Fetch.continueRequest không cho đổi https → http).
+  const fulfillFromLocal = async (requestId, localUrl) => {
+    try {
+      const res = await fetch(localUrl);
+      const body = Buffer.from(await res.arrayBuffer()).toString("base64");
+      const responseHeaders = [...res.headers].map(([name, value]) => ({ name, value }));
+      await send("Fetch.fulfillRequest", { requestId, responseCode: res.status, responseHeaders, body });
+    } catch {
+      await send("Fetch.failRequest", { requestId, errorReason: "Failed" }).catch(() => {});
+    }
+  };
+
   const off = cdp.on((msg) => {
     if (msg.sessionId !== sessionId) return;
-    if (msg.method === "Runtime.exceptionThrown") {
+    if (msg.method === "Fetch.requestPaused") {
+      const { requestId, request } = msg.params;
+      if (urlMap && request.url.startsWith(urlMap.from)) {
+        fulfillFromLocal(requestId, urlMap.to + request.url.slice(urlMap.from.length));
+      } else {
+        send("Fetch.continueRequest", { requestId }).catch(() => {});
+      }
+    } else if (msg.method === "Runtime.exceptionThrown") {
       const d = msg.params.exceptionDetails;
       problems.push({ type: "js", text: d.exception?.description || d.text });
     } else if (msg.method === "Log.entryAdded" && msg.params.entry.level === "error") {
       const e = msg.params.entry;
-      problems.push({ type: e.source === "network" ? "network" : "console", text: `${e.text} ${e.url || ""}`.trim() });
+      // Trình duyệt tự gọi /favicon.ico khi trang không khai báo icon: không phải lỗi của trang
+      // (favicon khai báo trong trang mà thiếu file thì tools/check-site.mjs đã bắt).
+      const autoFavicon = e.source === "network" && /\/favicon\.ico(\?|$)/.test(e.url || "");
+      if (!autoFavicon) {
+        problems.push({ type: e.source === "network" ? "network" : "console", text: `${e.text} ${e.url || ""}`.trim() });
+      }
     }
     for (const waiter of waiters) waiter(msg);
   });
@@ -131,6 +157,12 @@ function pageApi(cdp, targetId, sessionId) {
   const page = {
     problems,
     send,
+    // Ví dụ: page.mapUrl("https://user.github.io/repo/", "http://127.0.0.1:8080/") để xem trước
+    // trang dùng URL tuyệt đối (như 404.html với <base href>) bằng file trên máy.
+    async mapUrl(from, to) {
+      urlMap = { from, to };
+      await send("Fetch.enable", { patterns: [{ urlPattern: `${from}*` }] });
+    },
     async evaluate(expression) {
       const r = await send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true });
       if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description || r.exceptionDetails.text);

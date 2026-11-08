@@ -10,7 +10,7 @@
 //   ví dụ:   node tools/screenshots.mjs              (tất cả)
 //            node tools/screenshots.mjs spa mau/menu/
 
-import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { createServer } from "./serve.mjs";
 import { withChrome } from "./chrome.mjs";
@@ -74,9 +74,16 @@ async function main() {
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const origin = `http://127.0.0.1:${server.address().port}/`;
 
+  // Địa chỉ thật (canonical của index.html): request tới đó được trả bằng file trên máy,
+  // nhờ vậy 404.html (dùng <base href> tuyệt đối) hiển thị đúng ngay cả trước khi deploy.
+  const base = existsSync("index.html")
+    ? readFileSync("index.html", "utf8").match(/<link rel="canonical" href="(https?:\/\/[^"]+)"/)?.[1]
+    : null;
+
   try {
     await withChrome(async (browser) => {
       const page = await browser.newPage();
+      if (base) await page.mapUrl(base.replace(/\/?$/, "/"), origin);
       for (const p of pages) {
         if (!existsSync(p.file)) {
           console.log(`⚠ Bỏ qua ${p.name}: chưa có ${p.file}`);
@@ -86,14 +93,11 @@ async function main() {
           const langs = p.langs && vp.width < 700 ? p.langs : p.langs ? ["vi"] : [null];
           for (const lang of langs) {
             const label = [p.name, vp.width, lang].filter(Boolean).join("-");
-            await page.goto(origin + p.path + (lang ? `?lang=${lang}` : ""), vp);
+            const url = origin + p.path + (lang ? `?lang=${lang}` : "");
+            await page.goto(url, vp);
 
-            const issues = page.problems.filter((x) => {
-              // Trang 404 dùng <base href> trỏ về địa chỉ thật, nên khi xem trên máy (trước khi deploy)
-              // tài nguyên có thể chưa tải được; chỉ bắt lỗi JavaScript.
-              if (p.expect404) return x.type === "js";
-              return true;
-            });
+            // Trang 404: chính tài liệu trả mã 404 là đúng ý, chỉ bỏ qua đúng lỗi đó.
+            const issues = page.problems.filter((x) => !(p.expect404 && x.type === "network" && x.text.includes(url)));
             for (const x of issues) problems.push(`${label}: lỗi ${x.type}: ${x.text}`);
 
             const overflow = await page.evaluate(OVERFLOW_JS);
@@ -112,6 +116,11 @@ async function main() {
               writeFileSync(fold, await page.screenshot());
               saved.push(fold);
             }
+            // Ảnh toàn trang: ẩn phần tử position:fixed (như nút Zalo nổi), vì khi chụp vượt khung nhìn
+            // chúng chỉ nằm ở màn hình đầu và che nội dung bên dưới. Ảnh màn hình đầu đã có chúng.
+            await page.evaluate(`document.querySelectorAll("body *").forEach((el) => {
+              if (getComputedStyle(el).position === "fixed") el.style.setProperty("visibility", "hidden", "important");
+            })`);
             for (let y = 0, n = 1; y < height; y += vp.chunk, n++) {
               const file = join(OUT, `${label}-${n}.png`);
               const clip = { x: 0, y, width: vp.width, height: Math.min(vp.chunk, height - y) };
