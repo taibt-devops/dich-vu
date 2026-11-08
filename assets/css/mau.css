@@ -196,7 +196,7 @@ a {
   backdrop-filter: blur(10px);
 }
 
-.top .wrap {
+.top > .wrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -900,6 +900,198 @@ img.photo {
 }
 
 .hours dd {
+  font-weight: 700;
+}
+
+/* ---------- Menu QR ---------- */
+.menu-nav {
+  border-top: 1px solid var(--line);
+}
+
+.menu-nav ul {
+  display: flex;
+  gap: 0.5rem;
+  margin-block: 0;
+  padding: 0.6rem 0;
+  overflow-x: auto;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+.menu-nav ul::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0.3rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.menu-nav a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.menu-section {
+  padding-block: 1.75rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.menu-section h2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  align-items: center;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 1.875rem);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-body), var(--font-ko), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.menu-note {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.how-to {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  list-style: none;
+  counter-reset: how;
+}
+
+.how-to li {
+  display: grid;
+  grid-template-columns: 1.8rem 1fr;
+  gap: 0.65rem;
+  align-items: start;
+}
+
+.how-to li::before {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  content: counter(how);
+  counter-increment: how;
+}
+
+.dishes {
+  margin-top: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.dish {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem 1rem;
+  padding-block: 0.85rem;
+  border-bottom: 1px dashed var(--line);
+}
+
+.dish:last-child {
+  border-bottom: 0;
+}
+
+.dish-name {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Khi xem bằng tiếng Anh/Hàn vẫn hiện tên tiếng Việt chữ nhỏ, để khách chỉ cho nhân viên. */
+html:not([lang="vi"]) body .dish-name > [lang="vi"] {
+  display: block !important;
+  order: 2;
+  margin-top: 0.1rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
+
+.dish-price {
+  color: var(--accent);
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.dish-price small {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.dish-desc {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.dish-tags {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  gap: 0.35rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 0.05rem 0.5rem;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.tag-spicy {
+  background: #fde2dc;
+  color: #8f2a1b;
+}
+
+.cooking {
+  margin-top: 1.1rem;
+}
+
+.cooking h3 {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-body), var(--font-ko), sans-serif;
+  font-size: 1.0625rem;
   font-weight: 700;
 }
 
