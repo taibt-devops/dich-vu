@@ -9,6 +9,7 @@
 // Cách dùng: node tools/screenshots.mjs [trang ...]
 //   ví dụ:   node tools/screenshots.mjs              (tất cả)
 //            node tools/screenshots.mjs spa mau/menu/
+// Repo nhân bản cho khách: sửa danh sách PAGES bên dưới cho đúng các trang của khách.
 
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -17,11 +18,12 @@ import { withChrome } from "./chrome.mjs";
 
 const OUT = ".screenshots";
 const LANGS = ["vi", "en", "ko"];
+// Trang có nút đổi ngôn ngữ (data-lang) được chụp thêm ở EN và KO; không cần khai báo ở đây.
 const PAGES = [
-  { name: "dich-vu", path: "", file: "index.html" },
-  { name: "homestay", path: "mau/homestay/", file: "mau/homestay/index.html", langs: LANGS },
-  { name: "spa", path: "mau/spa/", file: "mau/spa/index.html", langs: LANGS },
-  { name: "menu", path: "mau/menu/", file: "mau/menu/index.html", langs: LANGS },
+  { name: "trang-chu", path: "", file: "index.html" },
+  { name: "homestay", path: "mau/homestay/", file: "mau/homestay/index.html" },
+  { name: "spa", path: "mau/spa/", file: "mau/spa/index.html" },
+  { name: "menu", path: "mau/menu/", file: "mau/menu/index.html" },
   // Đường dẫn không tồn tại, nằm sâu 2 cấp: GitHub Pages trả 404.html tại chính URL này.
   { name: "404", path: "mau/khong-co/", file: "404.html", expect404: true },
 ];
@@ -89,8 +91,9 @@ async function main() {
           console.log(`⚠ Bỏ qua ${p.name}: chưa có ${p.file}`);
           continue;
         }
+        const multilingual = !p.expect404 && readFileSync(p.file, "utf8").includes("data-lang=");
         for (const vp of VIEWPORTS) {
-          const langs = p.langs && vp.width < 700 ? p.langs : p.langs ? ["vi"] : [null];
+          const langs = multilingual ? (vp.width < 700 ? LANGS : ["vi"]) : [null];
           for (const lang of langs) {
             const label = [p.name, vp.width, lang].filter(Boolean).join("-");
             const url = origin + p.path + (lang ? `?lang=${lang}` : "");

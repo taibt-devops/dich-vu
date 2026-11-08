@@ -21,6 +21,14 @@ function png(width, height) {
   return buf;
 }
 
+// JPEG tối thiểu: SOI + APP0 + SOF0 (check-site chỉ đọc kích thước trong SOF).
+function jpeg(width, height) {
+  const app0 = [0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00];
+  const sof0 = [0xff, 0xc0, 0x00, 0x11, 0x08, height >> 8, height & 0xff, width >> 8, width & 0xff, 0x03];
+  sof0.push(0x01, 0x22, 0x00, 0x02, 0x11, 0x01, 0x03, 0x11, 0x01);
+  return Buffer.from([0xff, 0xd8, ...app0, ...sof0, 0xff, 0xd9]);
+}
+
 // Trang có đủ thẻ head bắt buộc; `omit` bỏ một thẻ để thử báo lỗi.
 function doc(canonical, body = "", { omit = [], head = "" } = {}) {
   const tags = [
@@ -193,6 +201,25 @@ test("og:image sai kích thước bị báo lỗi", async (t) => {
   assert.equal(errors.length, 1);
   assert.match(errors[0], /1200×630/);
   assert.match(errors[0], /800×600/);
+});
+
+test("og:image là ảnh chụp JPEG 1200×630 được chấp nhận (website thật thường dùng ảnh chụp)", async (t) => {
+  const root = makeSite(t, {
+    "index.html": doc(BASE, "", { head: `<meta property="og:image" content="${BASE}anh/og.jpg">`, omit: ["og:image"] }),
+    "anh/og.jpg": jpeg(1200, 630),
+  });
+  const { errors } = await checkSite(root);
+  assert.deepEqual(errors, []);
+});
+
+test("og:image JPEG sai kích thước bị báo lỗi", async (t) => {
+  const root = makeSite(t, {
+    "index.html": doc(BASE, "", { head: `<meta property="og:image" content="${BASE}anh/og.jpg">`, omit: ["og:image"] }),
+    "anh/og.jpg": jpeg(1080, 1080),
+  });
+  const { errors } = await checkSite(root);
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /1080×1080/);
 });
 
 test("canonical không khớp đường dẫn trang bị báo lỗi", async (t) => {

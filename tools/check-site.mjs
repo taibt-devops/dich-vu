@@ -3,7 +3,7 @@
 //   - link nội bộ (href/src/srcset) trỏ tới file có thật, kể cả #anchor
 //   - cấm đường dẫn bắt đầu bằng "/" (sẽ hỏng khi site chạy ở <user>.github.io/<repo>/)
 //   - trang có đủ thẻ head: lang, description, canonical, Open Graph, favicon
-//   - canonical và og:url khớp đường dẫn trang; og:image là PNG 1200×630 có thật
+//   - canonical và og:url khớp đường dẫn trang; og:image là ảnh PNG/JPEG 1200×630 có thật
 //   - sitemap.xml và robots.txt dùng đúng địa chỉ gốc; trang noindex không nằm trong sitemap
 //   - đếm placeholder DIEN_... còn sót
 // Địa chỉ gốc (BASE) lấy từ <link rel="canonical"> của index.html ở thư mục gốc.
@@ -99,15 +99,30 @@ function parseTags(text) {
 
 const relTokens = (tag) => (tag.attrs.rel || "").toLowerCase().split(/\s+/);
 
-function pngSize(file) {
+// Kích thước ảnh PNG (chunk IHDR) hoặc JPEG (marker SOFn); null nếu không đọc được.
+function imageSize(file) {
+  let buf;
   try {
-    const buf = readFileSync(file);
-    const sig = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
-    if (buf.length < 24 || !sig.every((b, i) => buf[i] === b) || buf.toString("ascii", 12, 16) !== "IHDR") return null;
-    return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+    buf = readFileSync(file);
   } catch {
     return null;
   }
+  const png = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+  if (buf.length >= 24 && png.every((b, i) => buf[i] === b) && buf.toString("ascii", 12, 16) === "IHDR") {
+    return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+  }
+  if (buf.length >= 4 && buf[0] === 0xff && buf[1] === 0xd8) {
+    let pos = 2;
+    while (pos + 9 < buf.length) {
+      if (buf[pos] !== 0xff) return null;
+      const marker = buf[pos + 1];
+      const length = buf.readUInt16BE(pos + 2);
+      const isSof = marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker);
+      if (isSof) return { width: buf.readUInt16BE(pos + 7), height: buf.readUInt16BE(pos + 5) };
+      pos += 2 + length;
+    }
+  }
+  return null;
 }
 
 async function probe(url) {
@@ -223,8 +238,8 @@ export async function checkSite(rootDir, { external = false } = {}) {
       fail("og:image phải là URL tuyệt đối (Zalo/Facebook không đọc đường dẫn tương đối)");
     } else if (ogImage && BASE && ogImage.startsWith(BASE)) {
       const file = decodeURIComponent(ogImage.slice(BASE.length).split(/[?#]/)[0]);
-      const size = pngSize(join(root, file));
-      if (!size) fail(`og:image ${file} không tồn tại hoặc không phải PNG`);
+      const size = imageSize(join(root, file));
+      if (!size) fail(`og:image ${file} không tồn tại hoặc không phải ảnh PNG/JPEG`);
       else if (size.width !== OG_WIDTH || size.height !== OG_HEIGHT) {
         fail(`og:image ${file} là ${size.width}×${size.height}, cần ${OG_WIDTH}×${OG_HEIGHT}`);
       }
