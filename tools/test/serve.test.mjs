@@ -16,6 +16,8 @@ function makeSite(t) {
     "site/assets/x.css": "body{}",
     "site/assets/i.svg": "<svg></svg>",
     "site/assets/a.png": "png",
+    "site/.git/config": "BI MAT GIT",
+    "site/.superpowers/ghi-chu.md": "BI MAT NHAP",
     "secret.txt": "BI MAT",
   };
   for (const [rel, content] of Object.entries(files)) {
@@ -70,6 +72,15 @@ test("Content-Type đúng theo đuôi file", async (t) => {
     const res = await get(path);
     assert.equal(res.status, 200, path);
     assert.match(res.headers.get("content-type"), type, path);
+  }
+});
+
+test("không phục vụ thư mục/tệp ẩn (.git, .superpowers…), giống GitHub Pages", async (t) => {
+  const get = await start(t, makeSite(t));
+  for (const path of ["/.git/config", "/.superpowers/ghi-chu.md", "/.git/"]) {
+    const res = await get(path);
+    assert.equal(res.status, 404, path);
+    assert.doesNotMatch(await res.text(), /BI MAT/, path);
   }
 });
 

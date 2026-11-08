@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 // Server tĩnh để xem thử site trên máy, hành xử giống GitHub Pages:
-//   thư mục → index.html, thư mục thiếu "/" cuối → 301, không có file → 404.html (mã 404).
+//   thư mục → index.html, thư mục thiếu "/" cuối → 301, không có file → 404.html (mã 404),
+//   không phục vụ thư mục/tệp ẩn (.git, .superpowers…).
 // Cách dùng: node tools/serve.mjs [cổng]      (mặc định 8080; hoặc biến môi trường PORT)
+// Mặc định chỉ mở cho chính máy này (127.0.0.1). Xem thử trên điện thoại cùng Wi-Fi: HOST=0.0.0.0 npm start
 
 import { createServer as createHttpServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
@@ -52,6 +54,7 @@ export function createServer(rootDir) {
     }
     const file = resolve(root, `.${pathname}`);
     if (file !== root && !file.startsWith(root + sep)) return notFound();
+    if (file.slice(root.length).split(sep).some((part) => part.startsWith("."))) return notFound();
 
     try {
       const info = await stat(file);
@@ -68,7 +71,9 @@ export function createServer(rootDir) {
 
 if (isMain(import.meta.url)) {
   const port = Number(process.argv[2]) || Number(process.env.PORT) || 8080;
-  createServer(".").listen(port, () => {
-    console.log(`Đang chạy: http://localhost:${port}/   (Ctrl+C để dừng)`);
+  const host = process.env.HOST || "127.0.0.1";
+  createServer(".").listen(port, host, () => {
+    const shown = host === "0.0.0.0" ? "<địa-chỉ-IP-của-máy>" : host === "127.0.0.1" ? "localhost" : host;
+    console.log(`Đang chạy: http://${shown}:${port}/   (Ctrl+C để dừng)`);
   });
 }

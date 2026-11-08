@@ -229,6 +229,9 @@ a:hover {
 }
 
 .site-nav a:not(.btn) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
   color: var(--text);
   text-decoration: none;
 }
@@ -239,7 +242,7 @@ a:hover {
 }
 
 .site-nav .btn {
-  min-height: 2.75rem;
+  min-height: 3rem;
   padding: 0.5rem 1.1rem;
   font-size: 1rem;
 }
@@ -252,7 +255,7 @@ a:hover {
   .site-nav a.nav-prices {
     display: inline-flex;
     align-items: center;
-    min-height: 2.75rem;
+    min-height: 3rem;
     padding: 0.4rem 1rem;
     border: 1px solid var(--line);
     border-radius: 999px;

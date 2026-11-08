@@ -30,7 +30,12 @@ const PAGES = [
 const VIEWPORTS = [
   { width: 390, height: 844, chunk: 1400 },
   { width: 1280, height: 800, chunk: 1000 },
+  // Điện thoại nhỏ + chữ to 125% (người lớn tuổi hay bật cỡ chữ lớn): chỉ kiểm tra, không lưu ảnh.
+  { width: 360, height: 780, textScale: 1.25, checksOnly: true },
 ];
+
+const MIN_TAP = 48; // chiều cao tối thiểu của nút, theo kế hoạch đã duyệt
+const TAP_SELECTOR = ".btn, .lang-switch button, .menu-nav a, .demo-bar a, .nav-prices, .zalo-float";
 
 // Chạy trong trang: phần tử làm tràn ngang (tối đa 5).
 const OVERFLOW_JS = `(() => {
@@ -43,9 +48,33 @@ const OVERFLOW_JS = `(() => {
     .slice(0, 5).map((el) => name(el) + " (right=" + Math.round(el.getBoundingClientRect().right) + "px)");
 })()`;
 
+// Chạy trong trang: nội dung bị cắt bên trong khung overflow:hidden (tràn ngang toàn trang không bắt được).
+const CLIP_JS = `(() => {
+  const name = (el) => el.tagName.toLowerCase() + (el.classList.length ? "." + [...el.classList].join(".") : "");
+  return [...document.body.querySelectorAll("*")]
+    .filter((el) => {
+      if (el.closest("svg") || el.clientWidth === 0) return false;
+      const overflow = getComputedStyle(el).overflowX;
+      return (overflow === "hidden" || overflow === "clip") && el.scrollWidth > el.clientWidth + 1;
+    })
+    .slice(0, 5).map((el) => name(el) + " (" + el.scrollWidth + "px > " + el.clientWidth + "px)");
+})()`;
+
+// Chạy trong trang: nút thấp hơn MIN_TAP (link chữ nằm trong đoạn văn không tính).
+const TAP_JS = `(() => {
+  const name = (el) => el.tagName.toLowerCase() + (el.classList.length ? "." + [...el.classList].join(".") : "");
+  const found = new Set();
+  for (const el of document.querySelectorAll(${JSON.stringify(TAP_SELECTOR)})) {
+    if (!el.getClientRects().length) continue;
+    const h = el.getBoundingClientRect().height;
+    if (h < ${MIN_TAP} - 0.5) found.add(name(el) + " cao " + Math.round(h * 10) / 10 + "px");
+  }
+  return [...found].slice(0, 8);
+})()`;
+
 // Chạy trong trang mẫu: nhóm thiếu bản dịch, và chữ của ngôn ngữ khác đang hiện.
-const LANG_JS = `(() => {
-  const langs = ${JSON.stringify(LANGS)};
+const langJs = (langList) => `(() => {
+  const langs = ${JSON.stringify(langList)};
   const current = document.documentElement.lang;
   const visible = (el) => el.getClientRects().length > 0;
   const name = (el) => el.tagName.toLowerCase() + (el.className ? "." + String(el.className).trim().split(/\\s+/).join(".") : "");
@@ -91,13 +120,20 @@ async function main() {
           console.log(`⚠ Bỏ qua ${p.name}: chưa có ${p.file}`);
           continue;
         }
-        const multilingual = !p.expect404 && readFileSync(p.file, "utf8").includes("data-lang=");
+        const source = readFileSync(p.file, "utf8");
+        const multilingual = !p.expect404 && source.includes("data-lang=");
+        // Ngôn ngữ của trang: thuộc tính data-langs trên <html> (mặc định "vi en ko"), giống assets/js/mau.js.
+        const pageLangs = (source.match(/<html[^>]*\sdata-langs="([^"]+)"/)?.[1] || LANGS.join(" ")).trim().split(/\s+/);
         for (const vp of VIEWPORTS) {
-          const langs = multilingual ? (vp.width < 700 ? LANGS : ["vi"]) : [null];
+          const langs = multilingual ? (vp.width < 700 ? pageLangs : [pageLangs[0]]) : [null];
           for (const lang of langs) {
-            const label = [p.name, vp.width, lang].filter(Boolean).join("-");
+            const label = [p.name, vp.width, vp.textScale ? "chu-to" : null, lang].filter(Boolean).join("-");
             const url = origin + p.path + (lang ? `?lang=${lang}` : "");
             await page.goto(url, vp);
+            if (vp.textScale) {
+              await page.evaluate(`document.documentElement.style.fontSize = "${vp.textScale * 100}%"`);
+              await page.evaluate("new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))");
+            }
 
             // Trang 404: chính tài liệu trả mã 404 là đúng ý, chỉ bỏ qua đúng lỗi đó.
             const issues = page.problems.filter((x) => !(p.expect404 && x.type === "network" && x.text.includes(url)));
@@ -105,15 +141,25 @@ async function main() {
 
             const overflow = await page.evaluate(OVERFLOW_JS);
             if (overflow.length) problems.push(`${label}: tràn ngang — ${overflow.join(", ")}`);
+            const clipped = await page.evaluate(CLIP_JS);
+            if (clipped.length) problems.push(`${label}: nội dung bị cắt — ${clipped.join(", ")}`);
+            if (!vp.textScale) {
+              const small = await page.evaluate(TAP_JS);
+              if (small.length) problems.push(`${label}: nút thấp hơn ${MIN_TAP}px — ${small.join(", ")}`);
+            }
 
             if (lang) {
-              const info = await page.evaluate(LANG_JS);
+              const info = await page.evaluate(langJs(pageLangs));
               if (info.current !== lang) problems.push(`${label}: ?lang=${lang} nhưng <html lang="${info.current}">`);
               for (const m of info.missing) problems.push(`${label}: thiếu bản dịch — ${m}`);
               for (const l of info.leaked) problems.push(`${label}: đang hiện chữ ngôn ngữ khác — ${l}`);
             }
 
             const height = await page.evaluate("document.documentElement.scrollHeight");
+            if (vp.checksOnly) {
+              console.log(`✔ ${label}: đã kiểm tra (không lưu ảnh)`);
+              continue;
+            }
             if (vp.width < 700) {
               const fold = join(OUT, `${label}-0-man-hinh-dau.png`);
               writeFileSync(fold, await page.screenshot());

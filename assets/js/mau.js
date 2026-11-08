@@ -9,19 +9,21 @@
  *   <span lang="vi">Phòng và giá</span><span lang="en">Rooms &amp; rates</span><span lang="ko">객실 및 요금</span>
  * mau.css chỉ hiện phần trùng với <html lang>. Không có JavaScript thì trang hiện tiếng Việt.
  * Nút chuyển ngôn ngữ: <button type="button" data-lang="en">EN</button>
+ * Danh sách ngôn ngữ của trang khai báo trên thẻ html: <html lang="vi" data-langs="vi en ko">
+ * (website chỉ có Việt + Anh: data-langs="vi en", rồi xoá nút KO; không cần sửa file này).
  *
  * Thứ tự chọn ngôn ngữ:
  *   1. tham số ?lang=vi|en|ko trên URL
  *   2. lựa chọn đã lưu khi khách bấm nút (localStorage; bị chặn thì bỏ qua, trang vẫn chạy)
  *   3. ngôn ngữ của điện thoại: vi → VI, ko → KO, ngôn ngữ khác → EN
- *   4. mặc định VI
+ *   4. mặc định: ngôn ngữ đầu tiên trong data-langs (VI)
  */
 (function () {
   "use strict";
 
-  var LANGS = ["vi", "en", "ko"];
-  var STORAGE_KEY = "chaokhach-lang";
   var root = document.documentElement;
+  var LANGS = String(root.getAttribute("data-langs") || "vi en ko").split(/\s+/).filter(Boolean);
+  var STORAGE_KEY = "chaokhach-lang";
   var titleEl = document.querySelector("title");
   var originalTitle = titleEl ? titleEl.textContent : document.title;
 
@@ -57,7 +59,7 @@
       var lang = valid(String(list[i]).slice(0, 2).toLowerCase());
       if (lang) return lang;
     }
-    return list.length ? "en" : null;
+    return list.length ? valid("en") || LANGS[0] : null;
   }
 
   function apply(lang) {
@@ -70,7 +72,7 @@
     }
   }
 
-  var current = fromUrl() || loadSaved() || fromDevice() || "vi";
+  var current = fromUrl() || loadSaved() || fromDevice() || LANGS[0];
   apply(current);
 
   function onClick(event) {

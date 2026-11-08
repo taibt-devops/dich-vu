@@ -34,13 +34,18 @@ class FakeButton {
 }
 
 // Dựng "trình duyệt" giả và chạy mau.js. storage: "ok" | "throws" (bị chặn) | "missing" (không có).
-function load({ search = "", stored, languages = [], storage = "ok", readyState = "loading" } = {}) {
+function load({ search = "", stored, languages = [], storage = "ok", readyState = "loading", langsAttr } = {}) {
   const store = new Map(stored === undefined ? [] : [[KEY, stored]]);
   // Bắt đầu với lang rỗng: script phải tự đặt ngôn ngữ, kể cả khi chọn tiếng Việt.
   const html = {
     lang: "",
+    attributes: langsAttr === undefined ? {} : { "data-langs": langsAttr },
+    getAttribute(name) {
+      return name in this.attributes ? this.attributes[name] : null;
+    },
     setAttribute(name, value) {
       if (name === "lang") this.lang = String(value);
+      this.attributes[name] = String(value);
     },
   };
   const titleEl = { textContent: TITLES.vi, dataset: { en: TITLES.en, ko: TITLES.ko } };
@@ -152,6 +157,16 @@ test("đổi về tiếng Việt thì khôi phục tiêu đề gốc", () => {
   page.click("vi");
   assert.equal(page.document.title, TITLES.vi);
   assert.equal(page.store.get(KEY), "vi");
+});
+
+test('trang chỉ có 2 ngôn ngữ (data-langs="vi en"): điện thoại tiếng Hàn và lựa chọn "ko" cũ → EN', () => {
+  const page = load({ langsAttr: "vi en", stored: "ko", languages: ["ko-KR"] });
+  assert.equal(page.html.lang, "en");
+});
+
+test('trang chỉ có 2 ngôn ngữ: ?lang=ko bị bỏ qua', () => {
+  const page = load({ langsAttr: "vi en", search: "?lang=ko" });
+  assert.equal(page.html.lang, "vi");
 });
 
 test("script nạp khi trang đã sẵn sàng (readyState complete) vẫn gắn được nút", () => {
