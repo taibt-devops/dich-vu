@@ -53,6 +53,10 @@ npm start            # http://localhost:8080/
 Mở qua server, đừng bấm đúp vào file HTML: link dạng `mau/homestay/` cần server để trả về `index.html`.
 Không có Node thì dùng `python -m http.server 8080`.
 
+Server mặc định chỉ mở cho chính máy tính này. Muốn xem thử trên điện thoại cùng mạng Wi-Fi: chạy
+`HOST=0.0.0.0 npm start` (PowerShell: `$env:HOST="0.0.0.0"; npm start`) rồi mở `http://<IP-máy-tính>:8080/`
+trên điện thoại.
+
 Thử nhanh ngôn ngữ của trang mẫu bằng cách thêm `?lang=en` hoặc `?lang=ko` vào URL. Không có tham số thì
 trang chọn theo thứ tự: lựa chọn khách đã bấm, ngôn ngữ của điện thoại (tiếng Hàn → KO, tiếng Việt → VI,
 ngôn ngữ khác → EN), cuối cùng là VI.
@@ -104,6 +108,11 @@ số cho dễ đọc thì dùng `&nbsp;`, ví dụ `0905&nbsp;123&nbsp;456`.
 
 Trên trang mẫu, các nút Zalo / WhatsApp / KakaoTalk / gọi điện cũng dùng các placeholder này. Chủ tiệm
 bấm thử là nhắn đúng cho bạn.
+
+**Kiểm tra Zalo của bạn:** mọi nút "Nhắn Zalo" dùng link `zalo.me/<số>`. Link này chỉ mở được cuộc trò
+chuyện khi tài khoản Zalo cho phép người lạ tìm thấy qua số điện thoại (trong phần quyền riêng tư của
+Zalo). Tin nhắn của người chưa kết bạn có thể nằm ở mục tin nhắn từ người lạ, nên nhớ xem mục này. Trước khi
+gửi link cho chủ tiệm, hãy bấm thử bằng một tài khoản Zalo khác.
 
 ## Gắn tên miền riêng
 

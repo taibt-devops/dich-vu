@@ -45,7 +45,11 @@ Mọi thứ chỉ dành cho trang mẫu đều nằm giữa hai dòng comment `D
 - thẻ `<meta name="robots" content="noindex">`: **phải xoá**, nếu không Google sẽ không index website của khách
 - thanh "Website mẫu, doanh nghiệp giả định" và nút về trang dịch vụ
 - ghi chú "các nút này mở Zalo của Chào Khách" (và mẹo dán mã QR ở trang menu)
-- dòng ghi công ở chân trang (giữ hay bỏ tuỳ thoả thuận với khách)
+- mục "Khách nói gì" của trang homestay: cả người lẫn lời nhận xét đều là giả định, **không được để lại**
+  trên website thật
+- dòng ghi công ở chân trang: giữ hay bỏ tuỳ thoả thuận với khách. Link trong đó là địa chỉ tuyệt đối về
+  trang Chào Khách nên giữ lại vẫn qua kiểm tra. Muốn giữ thì xoá 2 dòng comment DEMO bao quanh nó trước
+  khi chạy lệnh bên dưới.
 
 Xoá tất cả một lần:
 
@@ -54,6 +58,11 @@ cd ../bien-xanh
 perl -0pi -e 's/[ \t]*<!-- DEMO:BẮT ĐẦU.*?<!-- DEMO:KẾT THÚC -->\n//gs' index.html
 grep -c "DEMO:" index.html     # phải ra 0
 ```
+
+**Đánh giá trên website thật:** chỉ dùng đánh giá thật, có xin phép người viết (ghi tên ngắn như
+"Minh, Hà Nội"), hoặc đặt nút dẫn tới phần đánh giá trên Google Maps của tiệm. Muốn có lại mục đánh giá:
+chép khối `<section id="danh-gia">…</section>` từ trang mẫu homestay, bỏ dòng "Đánh giá minh hoạ", rồi
+điền đánh giá thật.
 
 ## 3. Sửa nội dung và bản dịch
 
@@ -71,12 +80,11 @@ Mọi chữ trên trang nằm trong `index.html`, 3 thứ tiếng đứng cạnh
 - Bản tiếng Anh và tiếng Hàn nên nhờ người bản xứ đọc lại trước khi bàn giao.
 
 **Khách chỉ cần 2 ngôn ngữ** (ví dụ Việt và Anh):
-1. Trong `assets/js/mau.js`, sửa `var LANGS = ["vi", "en", "ko"];` thành `["vi", "en"]`. Điện thoại tiếng
-   Hàn khi đó sẽ tự mở bản tiếng Anh, thay vì mở bản tiếng Hàn đã bị bỏ.
+1. Sửa thẻ mở đầu file thành `<html lang="vi" data-langs="vi en">`. Điện thoại tiếng Hàn khi đó tự mở bản
+   tiếng Anh. Không cần sửa `assets/js/mau.js`, test trong `tools/test/` vẫn chạy được.
 2. Xoá nút `<button … data-lang="ko">KO</button>`.
-3. Các `<span lang="ko">` có thể xoá dần hoặc để nguyên (chúng bị ẩn). Lưu ý `npm run screenshots` sẽ báo
-   "thiếu bản dịch" nếu một nhóm chỉ còn 2 trong 3 ngôn ngữ; muốn tắt báo lỗi đó thì sửa `LANGS` ở đầu
-   `tools/screenshots.mjs`.
+3. Xoá dần các `<span lang="ko">…</span>` cho file gọn, hoặc để nguyên (chúng bị ẩn). `npm run screenshots`
+   đọc `data-langs` nên chỉ kiểm tra bản dịch tiếng Việt và tiếng Anh.
 
 ## 4. Thay ảnh
 
@@ -109,6 +117,11 @@ Trang mẫu đang trỏ về số của Chào Khách qua các placeholder. Thay 
 ```bash
 sed -i -e 's/DIEN_SO_ZALO/0905123456/g' -e 's/DIEN_SO_QUOC_TE/84905123456/g' -e 's/DIEN_MA_KAKAO/xxxxxxx/g' index.html
 ```
+
+**Thử nút Zalo của khách trước khi bàn giao.** Link `zalo.me/<số>` chỉ mở được cuộc trò chuyện khi tài
+khoản Zalo đó cho phép người lạ tìm thấy qua số điện thoại (trong phần quyền riêng tư của Zalo). Tin nhắn
+của người chưa kết bạn có thể nằm ở mục tin nhắn từ người lạ: dặn khách xem mục này. Bấm thử bằng một tài
+khoản Zalo khác.
 
 Mỗi ngôn ngữ có một nút WhatsApp riêng (`<a … lang="vi|en|ko">`) với câu chào soạn sẵn sau `?text=`
 (dấu cách viết là `%20`). Sửa câu chào theo tên tiệm của khách.
@@ -152,8 +165,11 @@ Tạo thêm ở gốc repo mới:
 
 - `sitemap.xml`: chép từ repo `dich-vu`, chỉ để một dòng `<loc>https://bienxanh.vn/</loc>`.
 - `robots.txt`: chép từ repo `dich-vu`, sửa dòng `Sitemap:` thành `https://bienxanh.vn/sitemap.xml`.
-- `404.html` (nên có): chép từ repo `dich-vu`, sửa chữ cho đúng tiệm, đổi `<base href>` và canonical
-  sang tên miền mới.
+- `404.html`: không bắt buộc; không có thì GitHub hiện trang 404 mặc định. Trang 404 của Chào Khách dùng
+  `dich-vu.css` nên **không chép sang được**. Muốn có trang 404 riêng: làm một trang nhỏ dùng chung
+  `assets/css/mau.css` như `index.html` của khách, thêm `<meta name="robots" content="noindex">`,
+  `<base href="https://bienxanh.vn/">`, canonical và `og:url` là `https://bienxanh.vn/404.html`, rồi chạy
+  `npm test` để `check-site` soát lại.
 
 `tools/check-site.mjs` lấy địa chỉ gốc từ canonical của `index.html`. Nó sẽ báo nếu canonical, `og:url`,
 sitemap hay robots còn trỏ tên miền cũ, hoặc nếu `og:image` thiếu file hay sai kích thước.
