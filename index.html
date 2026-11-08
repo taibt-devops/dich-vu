@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chào Khách – Google Maps và website song ngữ cho tiệm ở Đà Nẵng</title>
+<meta name="description" content="Tối ưu Google Maps, làm website song ngữ và menu QR tiếng Anh, tiếng Hàn cho homestay, spa, quán ăn ở Đà Nẵng. Khảo sát miễn phí, làm xong trong 3–7 ngày.">
+<link rel="canonical" href="https://taibt-devops.github.io/dich-vu/">
+<meta name="theme-color" content="#0b6e8c">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Chào Khách">
+<meta property="og:title" content="Chào Khách – Thêm khách từ Google Maps và khách nước ngoài">
+<meta property="og:description" content="Google Maps, website song ngữ, menu QR tiếng Anh và tiếng Hàn cho homestay, spa, quán ăn ở Đà Nẵng. Nhắn Zalo để được tư vấn miễn phí.">
+<meta property="og:url" content="https://taibt-devops.github.io/dich-vu/">
+<meta property="og:image" content="https://taibt-devops.github.io/dich-vu/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chào Khách: Google Maps và website song ngữ cho tiệm ở Đà Nẵng">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;display=swap">
+<link rel="stylesheet" href="assets/css/dich-vu.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://taibt-devops.github.io/dich-vu/#chao-khach",
+  "name": "Chào Khách",
+  "description": "Tối ưu Google Maps (Google Business Profile), làm website song ngữ và menu QR tiếng Anh, tiếng Hàn cho homestay, căn hộ cho thuê, spa và quán ăn ở Đà Nẵng.",
+  "url": "https://taibt-devops.github.io/dich-vu/",
+  "image": "https://taibt-devops.github.io/dich-vu/assets/img/og.png",
+  "logo": "https://taibt-devops.github.io/dich-vu/assets/img/apple-touch-icon.png",
+  "telephone": "+DIEN_SO_QUOC_TE",
+  "email": "DIEN_EMAIL",
+  "priceRange": "Từ 800.000 ₫",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Đà Nẵng",
+    "addressCountry": "VN"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Đà Nẵng"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Bùi Thành Tài",
+    "jobTitle": "DevOps Engineer",
+    "url": "https://taibt-devops.github.io/portfolio/"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Các gói dịch vụ",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Gói A – Lên bản đồ",
+        "description": "Tối ưu Google Business Profile: ảnh, giờ mở cửa, mô tả tiếng Anh và tiếng Hàn, mã QR xin đánh giá. Trả một lần.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 800000, "priceCurrency": "VND" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Gói B – Website song ngữ",
+        "description": "Website giới thiệu, đặt chỗ qua Zalo và WhatsApp, menu QR song ngữ. Thêm 250.000 ₫/tháng, đã gồm gói C bảo trì.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 4000000, "priceCurrency": "VND" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Gói C – Bảo trì",
+        "description": "Hosting, sao lưu, cập nhật giá và ảnh theo yêu cầu. Đã gồm trong phí tháng của gói B."
+      }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 32 40">
+    <path d="M8 2h16a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6h-4.6L16 37.5 12.6 28H8a6 6 0 0 1-6-6V8a6 6 0 0 1 6-6z" fill="#0b6e8c"/>
+    <path d="M9 11.5h14M9 18h8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="22.5" cy="18" r="2.2" fill="#e8643a"/>
+  </symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5z"/><path d="M8.5 9h7M8.5 12h4"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3.5 6.2v13.3L9 17.3l6 2.4 5.5-2.2V4.2L15 6.4z"/><path d="M9 4v13.3M15 6.4v13.3"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></symbol>
+  <symbol id="i-browser" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 9h18M6.5 6.8h.01M9.5 6.8h.01"/></symbol>
+  <symbol id="i-translate" viewBox="0 0 24 24"><path d="M3.5 5.5h9M8 3.5v2M5.5 5.5c.7 3 2.6 5.4 5.5 7M10.5 5.5c-.8 3.2-3 6-6.5 7.8"/><path d="m12.5 20.5 3.8-9 3.8 9M13.8 17.5h5"/></symbol>
+  <symbol id="i-question" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.3 7.6L3.5 21l1.4-4.6A8.5 8.5 0 1 1 20.5 12z"/><path d="M9.8 9.7a2.3 2.3 0 1 1 3 2.2c-.5.2-.8.6-.8 1.1v.5M12 16.2h.01"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 3.5h3l1.6 4.2-2.1 1.5a11 11 0 0 0 6.8 6.8l1.5-2.1 4.2 1.6v3a2 2 0 0 1-2 2A16.5 16.5 0 0 1 3.5 5.5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><svg class="brand-mark" aria-hidden="true"><use href="#logo"></use></svg>Chào Khách</a>
+    <nav class="site-nav" aria-label="Mục lục">
+      <ul>
+        <li><a class="nav-prices" href="#bang-gia">Bảng giá</a></li>
+        <li class="nav-wide"><a href="#mau">Website mẫu</a></li>
+        <li class="nav-wide"><a href="#hoi-dap">Câu hỏi</a></li>
+        <li class="nav-wide"><a class="btn btn-primary" href="https://zalo.me/DIEN_SO_ZALO">Nhắn Zalo</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- 1. Hero -->
+  <section class="hero" aria-labelledby="tieu-de">
+    <div class="wrap">
+      <div>
+        <h1 id="tieu-de">Giúp homestay, spa, quán ăn ở Đà Nẵng có thêm khách từ Google Maps và khách nước ngoài</h1>
+        <p class="hero-lead">Tôi hoàn thiện trang Google Maps của tiệm, làm website và menu tiếng Anh, tiếng Hàn, để khách tìm thấy, đọc hiểu và nhắn đặt chỗ ngay trên điện thoại.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://zalo.me/DIEN_SO_ZALO"><svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg>Nhắn Zalo tư vấn miễn phí</a>
+          <a class="btn btn-outline" href="#mau">Xem website mẫu</a>
+        </div>
+        <p class="hero-note">Khảo sát miễn phí. Không làm cũng không sao.</p>
+      </div>
+      <div class="hero-map">
+        <svg viewBox="0 0 420 460" role="img" aria-label="Minh hoạ: tiệm của anh/chị trên bản đồ Đà Nẵng, được khách chào bằng tiếng Việt, tiếng Anh và tiếng Hàn">
+          <rect width="420" height="460" fill="#e3f1f4"/>
+          <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round">
+            <path d="M44 52q8-6 16 0t16 0"/>
+            <path d="M150 30q8-6 16 0t16 0"/>
+            <path d="M232 62q8-6 16 0t16 0"/>
+            <path d="M352 298q8-6 16 0t16 0"/>
+            <path d="M334 412q8-6 16 0t16 0"/>
+          </g>
+          <path d="M0 150C55 140 110 146 160 166C186 158 206 140 228 116C250 88 284 58 330 54C372 50 404 66 400 94C396 120 360 130 330 134C312 138 300 152 298 178C296 260 304 360 314 460H0Z" fill="#f4e8d4" stroke="#e3d3b9" stroke-width="2"/>
+          <path d="M298 182C296 262 304 360 313 460" fill="none" stroke="#efd5a6" stroke-width="9" stroke-linecap="round"/>
+          <path d="M262 94C292 70 342 64 378 78C352 100 300 108 262 94Z" fill="#d6e5cb"/>
+          <path d="M196 462C192 410 214 370 206 330C198 290 172 262 180 222C186 196 176 178 168 156" fill="none" stroke="#cbe5ec" stroke-width="14" stroke-linecap="round"/>
+          <g font-size="13" fill="#0b6e8c">
+            <text x="34" y="104">Vịnh Đà Nẵng</text>
+            <text x="326" y="334">Biển</text>
+            <text x="326" y="350">Mỹ Khê</text>
+          </g>
+          <g font-size="14" fill="#4e6470">
+            <circle cx="318" cy="96" r="6" fill="#0b6e8c" stroke="#fff" stroke-width="3"/>
+            <text x="332" y="101">Sơn Trà</text>
+            <circle cx="82" cy="288" r="6" fill="#0b6e8c" stroke="#fff" stroke-width="3"/>
+            <text x="96" y="293">Hải Châu</text>
+            <circle cx="252" cy="398" r="6" fill="#0b6e8c" stroke="#fff" stroke-width="3"/>
+            <text x="252" y="426" text-anchor="middle">An Thượng</text>
+          </g>
+          <g transform="translate(262 252)">
+            <path d="M-11-48H11a8 8 0 0 1 8 8v18a8 8 0 0 1-8 8H5L0 0-5-14h-6a8 8 0 0 1-8-8v-18a8 8 0 0 1 8-8z" fill="#e8643a"/>
+            <path d="M-10-36H10M-10-27H3" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          </g>
+          <rect x="200" y="262" width="124" height="28" rx="14" fill="#fff"/>
+          <text x="262" y="281" font-size="14" font-weight="700" fill="#16323d" text-anchor="middle">Tiệm của anh/chị</text>
+          <g fill="#fff">
+            <rect x="124" y="156" width="104" height="36" rx="18"/>
+            <path d="M206 189h14l18 16z"/>
+            <rect x="292" y="150" width="80" height="36" rx="18"/>
+            <path d="M300 180l12 4-28 22z"/>
+            <rect x="296" y="214" width="112" height="36" rx="18"/>
+            <path d="M298 224v14l-16-6z"/>
+          </g>
+          <g font-size="16" font-weight="700" fill="#0b6e8c" text-anchor="middle">
+            <text x="176" y="180">Xin chào!</text>
+            <text x="332" y="174">Hello!</text>
+            <text x="352" y="238" lang="ko">안녕하세요!</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Vấn đề thường gặp -->
+  <section id="van-de" class="section section-alt" aria-labelledby="van-de-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="van-de-tieu-de">Có phải tiệm mình đang gặp những chuyện này?</h2>
+        <p>Phần lớn khách du lịch chọn chỗ ăn, chỗ ở ngay trên điện thoại. Vài chi tiết nhỏ đủ để họ lướt qua tiệm của anh/chị.</p>
+      </div>
+      <ul class="problems">
+        <li class="problem">
+          <span class="problem-icon"><svg class="icon" aria-hidden="true"><use href="#i-map"></use></svg></span>
+          <div>
+            <h3>Trang Google Maps sơ sài</h3>
+            <p>Vài tấm ảnh cũ, thiếu giờ mở cửa, không có lời giới thiệu. Khách xem xong rồi chọn tiệm bên cạnh.</p>
+          </div>
+        </li>
+        <li class="problem">
+          <span class="problem-icon"><svg class="icon" aria-hidden="true"><use href="#i-star"></use></svg></span>
+          <div>
+            <h3>Ít đánh giá</h3>
+            <p>Khách hài lòng ra về, nhưng không ai nhắc họ để lại vài dòng trên Google.</p>
+          </div>
+        </li>
+        <li class="problem">
+          <span class="problem-icon"><svg class="icon" aria-hidden="true"><use href="#i-browser"></use></svg></span>
+          <div>
+            <h3>Chưa có website</h3>
+            <p>Khách nước ngoài quen xem website trước khi đặt. Chỉ có trang Facebook thì khó tạo lòng tin.</p>
+          </div>
+        </li>
+        <li class="problem">
+          <span class="problem-icon"><svg class="icon" aria-hidden="true"><use href="#i-translate"></use></svg></span>
+          <div>
+            <h3>Chưa có giới thiệu, menu tiếng Anh, tiếng Hàn</h3>
+            <p>Khách Hàn, khách Tây phải đoán món, đoán giá, hoặc chụp màn hình rồi nhờ ứng dụng dịch.</p>
+          </div>
+        </li>
+        <li class="problem">
+          <span class="problem-icon"><svg class="icon" aria-hidden="true"><use href="#i-question"></use></svg></span>
+          <div>
+            <h3>Khách nước ngoài khó đặt chỗ</h3>
+            <p>Họ không biết nhắn qua đâu, và lo tin nhắn của mình không ai đọc được.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Bảng giá -->
+  <section id="bang-gia" class="section" aria-labelledby="bang-gia-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="bang-gia-tieu-de">Bảng giá</h2>
+        <p>Giá tham khảo. Sau buổi khảo sát miễn phí, tôi báo giá chính xác theo nhu cầu của tiệm.</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <h3 class="plan-name"><span>Gói A</span>Lên bản đồ</h3>
+          <p class="plan-price"><small>Từ</small> 800.000đ</p>
+          <p class="plan-billing">Trả một lần</p>
+          <p class="plan-for">Cho tiệm muốn được tìm thấy và chọn nhiều hơn trên Google Maps.</p>
+          <ul>
+            <li>Tối ưu hồ sơ Google Business Profile, tức trang của tiệm trên Google Maps</li>
+            <li>Sắp xếp ảnh đẹp, cập nhật giờ mở cửa và số điện thoại</li>
+            <li>Viết mô tả tiếng Việt, tiếng Anh, tiếng Hàn</li>
+            <li>Mã QR xin đánh giá, in ra để dán ở quầy hoặc trên bàn</li>
+          </ul>
+          <a class="btn btn-outline" href="https://zalo.me/DIEN_SO_ZALO">Hỏi về gói A qua Zalo</a>
+        </article>
+        <article class="plan plan-b">
+          <h3 class="plan-name"><span>Gói B</span>Website song ngữ</h3>
+          <p class="plan-price"><small>Từ</small> 4.000.000đ</p>
+          <p class="plan-billing">Thêm 250.000đ/tháng</p>
+          <p class="plan-for">Cho tiệm muốn có trang riêng để gửi khách, và khách bấm là đặt chỗ được.</p>
+          <ul>
+            <li>Website giới thiệu: phòng, dịch vụ hoặc món ăn, giá, ảnh, vị trí</li>
+            <li>Đặt chỗ qua Zalo, WhatsApp: khách bấm nút là nhắn được ngay</li>
+            <li>Menu QR song ngữ cho khách quét tại bàn</li>
+            <li>Phí tháng đã gồm gói C bảo trì</li>
+          </ul>
+          <a class="btn btn-primary" href="https://zalo.me/DIEN_SO_ZALO">Hỏi về gói B qua Zalo</a>
+        </article>
+        <article class="plan plan-c">
+          <h3 class="plan-name"><span>Gói C</span>Bảo trì</h3>
+          <p class="plan-included">Đã gồm trong phí tháng của gói B</p>
+          <p class="plan-for">Anh/chị lo việc kinh doanh, phần kỹ thuật để tôi lo.</p>
+          <ul>
+            <li>Hosting: máy chủ để website luôn chạy</li>
+            <li>Sao lưu dữ liệu định kỳ</li>
+            <li>Cập nhật giá, ảnh theo yêu cầu: nhắn Zalo là xong</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Website mẫu -->
+  <section id="mau" class="section section-alt" aria-labelledby="mau-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="mau-tieu-de">Website mẫu</h2>
+        <p>Ba doanh nghiệp giả định, làm đúng cách tôi sẽ làm cho tiệm của anh/chị. Mở trên điện thoại và bấm VI, EN, KO ở góc trên để đổi ngôn ngữ.</p>
+      </div>
+      <ul class="samples">
+        <li class="sample sample-homestay">
+          <div class="sample-preview">
+            <svg viewBox="0 0 160 200" aria-hidden="true">
+              <rect x="8" y="6" width="144" height="230" rx="24" fill="#1f2a33"/>
+              <rect x="14" y="12" width="132" height="218" rx="19" fill="#fbf7f0"/>
+              <path d="M33 12h94a19 19 0 0 1 19 19v59H14V31a19 19 0 0 1 19-19z" fill="#1e5f8c"/>
+              <circle cx="118" cy="42" r="12" fill="#f2a541"/>
+              <path d="M14 80q16-8 33 0t33 0 33 0 33 0v10H14z" fill="#fbf7f0" opacity=".3"/>
+              <rect x="26" y="34" width="62" height="8" rx="4" fill="#fff"/>
+              <rect x="26" y="48" width="44" height="6" rx="3" fill="#fff" opacity=".7"/>
+              <rect x="26" y="102" width="108" height="34" rx="8" fill="#fff" stroke="#e6ddd0"/>
+              <rect x="32" y="108" width="28" height="22" rx="4" fill="#d9e5ee"/>
+              <rect x="66" y="112" width="50" height="5" rx="2.5" fill="#1f2a33" opacity=".7"/>
+              <rect x="66" y="121" width="30" height="5" rx="2.5" fill="#f2a541"/>
+              <rect x="26" y="142" width="108" height="34" rx="8" fill="#fff" stroke="#e6ddd0"/>
+              <rect x="32" y="148" width="28" height="22" rx="4" fill="#d9e5ee"/>
+              <rect x="66" y="152" width="44" height="5" rx="2.5" fill="#1f2a33" opacity=".7"/>
+              <rect x="66" y="161" width="30" height="5" rx="2.5" fill="#f2a541"/>
+              <rect x="26" y="184" width="108" height="18" rx="9" fill="#1e5f8c"/>
+            </svg>
+          </div>
+          <div class="sample-body">
+            <h3>Gió Nồm Homestay</h3>
+            <p>Homestay gần biển Mỹ Khê: các loại phòng kèm giá, tiện ích, vị trí, đặt phòng qua Zalo hoặc WhatsApp.</p>
+            <a class="sample-link" href="mau/homestay/">Xem mẫu homestay</a>
+          </div>
+        </li>
+        <li class="sample sample-spa">
+          <div class="sample-preview">
+            <svg viewBox="0 0 160 200" aria-hidden="true">
+              <rect x="8" y="6" width="144" height="230" rx="24" fill="#2d2b27"/>
+              <rect x="14" y="12" width="132" height="218" rx="19" fill="#faf7f2"/>
+              <path d="M33 12h94a19 19 0 0 1 19 19v53H14V31a19 19 0 0 1 19-19z" fill="#5b7b62"/>
+              <path d="M110 30c15 2 22 15 20 30-15-2-22-15-20-30z" fill="#b8926a"/>
+              <path d="M96 46c10 1 14 9 13 19-10-1-14-9-13-19z" fill="#b8926a" opacity=".7"/>
+              <rect x="26" y="36" width="56" height="8" rx="4" fill="#fff"/>
+              <rect x="26" y="50" width="40" height="6" rx="3" fill="#fff" opacity=".7"/>
+              <rect x="26" y="98" width="60" height="5" rx="2.5" fill="#2d2b27" opacity=".7"/>
+              <rect x="110" y="98" width="24" height="5" rx="2.5" fill="#b8926a"/>
+              <rect x="26" y="110" width="108" height="1" fill="#e5ddd0"/>
+              <rect x="26" y="120" width="70" height="5" rx="2.5" fill="#2d2b27" opacity=".7"/>
+              <rect x="110" y="120" width="24" height="5" rx="2.5" fill="#b8926a"/>
+              <rect x="26" y="132" width="108" height="1" fill="#e5ddd0"/>
+              <rect x="26" y="142" width="54" height="5" rx="2.5" fill="#2d2b27" opacity=".7"/>
+              <rect x="110" y="142" width="24" height="5" rx="2.5" fill="#b8926a"/>
+              <rect x="26" y="154" width="108" height="1" fill="#e5ddd0"/>
+              <rect x="26" y="164" width="64" height="5" rx="2.5" fill="#2d2b27" opacity=".7"/>
+              <rect x="110" y="164" width="24" height="5" rx="2.5" fill="#b8926a"/>
+              <rect x="26" y="184" width="108" height="18" rx="9" fill="#5b7b62"/>
+            </svg>
+          </div>
+          <div class="sample-body">
+            <h3>Lụa Spa</h3>
+            <p>Spa ở An Thượng: bảng giá dịch vụ, giờ mở cửa, đặt lịch qua Zalo, KakaoTalk hoặc WhatsApp.</p>
+            <a class="sample-link" href="mau/spa/">Xem mẫu spa</a>
+          </div>
+        </li>
+        <li class="sample sample-menu">
+          <div class="sample-preview">
+            <svg viewBox="0 0 160 200" aria-hidden="true">
+              <rect x="8" y="6" width="144" height="230" rx="24" fill="#1c2530"/>
+              <rect x="14" y="12" width="132" height="218" rx="19" fill="#fff"/>
+              <path d="M33 12h94a19 19 0 0 1 19 19v19H14V31a19 19 0 0 1 19-19z" fill="#c2412d"/>
+              <rect x="26" y="26" width="64" height="8" rx="4" fill="#fff"/>
+              <rect x="22" y="58" width="36" height="12" rx="6" fill="#c2412d"/>
+              <rect x="62" y="58" width="32" height="12" rx="6" fill="#fff" stroke="#e7d9d4"/>
+              <rect x="98" y="58" width="40" height="12" rx="6" fill="#fff" stroke="#e7d9d4"/>
+              <rect x="26" y="84" width="58" height="6" rx="3" fill="#1c2530" opacity=".75"/>
+              <rect x="26" y="94" width="40" height="4" rx="2" fill="#1c2530" opacity=".3"/>
+              <rect x="104" y="84" width="30" height="6" rx="3" fill="#0f5c6e"/>
+              <rect x="26" y="108" width="108" height="1" fill="#efe4df"/>
+              <rect x="26" y="118" width="66" height="6" rx="3" fill="#1c2530" opacity=".75"/>
+              <rect x="26" y="128" width="46" height="4" rx="2" fill="#1c2530" opacity=".3"/>
+              <rect x="104" y="118" width="30" height="6" rx="3" fill="#0f5c6e"/>
+              <rect x="26" y="142" width="108" height="1" fill="#efe4df"/>
+              <rect x="26" y="152" width="52" height="6" rx="3" fill="#1c2530" opacity=".75"/>
+              <rect x="26" y="162" width="36" height="4" rx="2" fill="#1c2530" opacity=".3"/>
+              <rect x="104" y="152" width="30" height="6" rx="3" fill="#0f5c6e"/>
+              <rect x="26" y="176" width="108" height="1" fill="#efe4df"/>
+              <rect x="26" y="186" width="60" height="6" rx="3" fill="#1c2530" opacity=".75"/>
+              <rect x="104" y="186" width="30" height="6" rx="3" fill="#0f5c6e"/>
+            </svg>
+          </div>
+          <div class="sample-body">
+            <h3>Hải Sản Nhà Chài</h3>
+            <p>Menu QR của quán hải sản: món theo nhóm, giá theo kg cho hải sản tươi, chữ to dễ đọc trên điện thoại.</p>
+            <a class="sample-link" href="mau/menu/">Xem mẫu menu QR</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Quy trình 4 bước -->
+  <section id="quy-trinh" class="section" aria-labelledby="quy-trinh-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="quy-trinh-tieu-de">Làm việc thế nào?</h2>
+        <p>Bốn bước, mọi trao đổi qua Zalo. Anh/chị không cần biết gì về kỹ thuật.</p>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <h3>Nhắn Zalo</h3>
+          <p>Kể tôi nghe về tiệm: bán gì, khách thường là ai, đã có Google Maps hay Facebook chưa.</p>
+        </li>
+        <li class="step">
+          <h3>Khảo sát miễn phí</h3>
+          <p>Tôi xem tiệm đang hiện ra thế nào trên Google Maps, rồi đề xuất gói phù hợp.</p>
+        </li>
+        <li class="step">
+          <h3>Làm trong 3–7 ngày</h3>
+          <p>Anh/chị gửi ảnh, bảng giá. Tôi làm và gửi bản xem trước qua Zalo để anh/chị góp ý.</p>
+        </li>
+        <li class="step">
+          <h3>Bàn giao và hướng dẫn</h3>
+          <p>Tôi hướng dẫn cách xem đánh giá và cách nhờ tôi đổi giá, đổi ảnh khi cần.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ƯU ĐÃI KHÁCH ĐẦU TIÊN: BẮT ĐẦU. Để bỏ ưu đãi: xoá từ dòng này tới dòng "ƯU ĐÃI KHÁCH ĐẦU TIÊN: KẾT THÚC",
+       rồi xoá khối CSS cùng tên trong assets/css/dich-vu.css. Không có chỗ nào khác trỏ tới mục này. -->
+  <section id="uu-dai" class="section" aria-labelledby="uu-dai-tieu-de">
+    <div class="wrap">
+      <div class="offer-ticket">
+        <p class="offer-stub">Giảm <strong>50%</strong></p>
+        <div class="offer-body">
+          <h2 id="uu-dai-tieu-de">Ưu đãi cho 3 khách đầu tiên</h2>
+          <p>Đổi lại, anh/chị cho phép tôi dùng website hoặc trang Google Maps của tiệm làm ví dụ khi giới thiệu với tiệm khác, và viết giúp tôi vài dòng nhận xét sau khi dùng.</p>
+          <a class="btn btn-primary" href="https://zalo.me/DIEN_SO_ZALO">Nhắn Zalo để giữ suất</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ƯU ĐÃI KHÁCH ĐẦU TIÊN: KẾT THÚC -->
+
+  <!-- 7. Câu hỏi thường gặp -->
+  <section id="hoi-dap" class="section section-alt" aria-labelledby="hoi-dap-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="hoi-dap-tieu-de">Câu hỏi thường gặp</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Bao lâu thì xong?</summary>
+          <p>Thường 3–7 ngày kể từ khi anh/chị gửi đủ ảnh và thông tin. Nếu tiệm chưa có hồ sơ trên Google Maps, bước Google xác minh có thể lâu hơn, tuỳ vào Google.</p>
+        </details>
+        <details>
+          <summary>Tên miền đứng tên ai?</summary>
+          <p>Đứng tên anh/chị. Tôi hỗ trợ đăng ký và cài đặt, nhưng tên miền là tài sản của tiệm, không phải của tôi.</p>
+        </details>
+        <details>
+          <summary>Nếu ngừng dùng dịch vụ thì sao?</summary>
+          <p>Anh/chị được nhận lại toàn bộ dữ liệu: nội dung, ảnh, mã nguồn website và quyền quản lý tên miền. Hồ sơ Google Maps luôn do anh/chị làm chủ.</p>
+        </details>
+        <details>
+          <summary>Tôi có cần tự quản lý không?</summary>
+          <p>Không cần. Muốn đổi giá, thêm ảnh hay sửa giờ mở cửa, anh/chị chỉ cần nhắn Zalo cho tôi. Nếu muốn tự trả lời đánh giá trên Google, tôi hướng dẫn trong buổi bàn giao.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Về tôi -->
+  <section id="ve-toi" class="section" aria-labelledby="ve-toi-tieu-de">
+    <div class="wrap about">
+      <div class="avatar" aria-hidden="true">T</div>
+      <div>
+        <h2 id="ve-toi-tieu-de">Về tôi</h2>
+        <p>Tôi là Bùi Thành Tài, kỹ sư DevOps ở Đà Nẵng, hơn 5 năm vận hành hệ thống: giữ cho website và ứng dụng chạy ổn định, có sao lưu và được theo dõi hằng ngày.</p>
+        <p>Tôi mang đúng cách làm cẩn thận đó vào website của các tiệm nhỏ: trang nhẹ, mở nhanh trên điện thoại, dữ liệu luôn có bản sao lưu. <a href="https://taibt-devops.github.io/portfolio/">Xem hồ sơ công việc của tôi</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Liên hệ -->
+  <section id="lien-he" class="section contact" aria-labelledby="lien-he-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="lien-he-tieu-de">Liên hệ</h2>
+        <p>Nhắn Zalo là nhanh nhất. Tư vấn và khảo sát đều miễn phí.</p>
+      </div>
+      <ul class="contact-list">
+        <li><a class="btn btn-light" href="https://zalo.me/DIEN_SO_ZALO"><svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg>Nhắn Zalo tư vấn miễn phí</a></li>
+        <li class="contact-line"><svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg><span>Điện thoại: <a href="tel:DIEN_SO_ZALO">DIEN_SO_ZALO</a></span></li>
+        <li class="contact-line"><svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg><span>Email: <a href="mailto:DIEN_EMAIL">DIEN_EMAIL</a></span></li>
+      </ul>
+      <p class="contact-area">Phục vụ các tiệm ở Đà&nbsp;Nẵng: An&nbsp;Thượng, Mỹ&nbsp;Khê, Sơn&nbsp;Trà, Hải&nbsp;Châu và các khu lân cận.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Chào Khách. Bùi Thành Tài, Đà Nẵng.</p>
+    <p><a href="https://taibt-devops.github.io/portfolio/">Hồ sơ công việc</a></p>
+  </div>
+</footer>
+
+<a class="zalo-float" href="https://zalo.me/DIEN_SO_ZALO"><svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg>Nhắn Zalo</a>
+</body>
+</html>

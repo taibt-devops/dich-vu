@@ -1,0 +1,6 @@
+# Ở dạng <user>.github.io/<repo>/, công cụ tìm kiếm chỉ đọc robots.txt ở gốc tên miền,
+# nên file này có tác dụng từ khi site gắn tên miền riêng. Trang mẫu dùng thẻ noindex thay vì chặn ở đây.
+User-agent: *
+Allow: /
+
+Sitemap: https://taibt-devops.github.io/dich-vu/sitemap.xml
