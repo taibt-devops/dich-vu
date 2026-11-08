@@ -764,6 +764,145 @@ img.photo {
   }
 }
 
+/* ---------- Chip trên nền hero ---------- */
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-chips li {
+  padding: 0.25rem 0.8rem;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.14);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* ---------- Bảng giá dạng bảng (spa) ---------- */
+.price-groups {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.table-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.price-table caption {
+  padding: 1rem 1rem 0.5rem;
+  font-family: var(--font-heading), var(--font-ko), serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.price-table th,
+.price-table td {
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.price-table thead th {
+  border-top: 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.price-table tbody th {
+  font-weight: 600;
+}
+
+.price-table .time {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.price-table .money {
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (min-width: 960px) {
+  .price-groups {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+}
+
+/* ---------- Ưu điểm ---------- */
+.perks {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.perk {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 0.85rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.perk .icon {
+  grid-row: span 2;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--primary);
+}
+
+.perk h3 {
+  font-family: var(--font-body), var(--font-ko), sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.perk p {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+@media (min-width: 760px) {
+  .perks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Giờ mở cửa ---------- */
+.hours div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  justify-content: space-between;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.hours dd {
+  font-weight: 700;
+}
+
 /* ---------- Chân trang ---------- */
 .foot {
   padding-block: 2.25rem 2.75rem;
