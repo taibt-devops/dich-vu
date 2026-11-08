@@ -1,0 +1,21 @@
+{
+  "name": "chao-khach",
+  "private": true,
+  "description": "Website dịch vụ Chào Khách và 3 website mẫu — HTML/CSS/JS thuần, deploy bằng GitHub Pages",
+  "engines": {
+    "node": "^22.22.0 || >=24.8.0"
+  },
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "validate": "html-validate \"**/*.html\"",
+    "links": "node tools/check-site.mjs",
+    "links:external": "node tools/check-site.mjs --external",
+    "test:unit": "node --test \"tools/test/*.test.mjs\"",
+    "test": "npm run validate && npm run links && npm run test:unit",
+    "screenshots": "node tools/screenshots.mjs",
+    "images": "node tools/render-images.mjs"
+  },
+  "devDependencies": {
+    "html-validate": "11.16.4"
+  }
+}
