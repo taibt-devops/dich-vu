@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Gió Nồm Homestay – Rooms near My Khe Beach, Da Nang" data-ko="Gió Nồm Homestay – 다낭 미케 비치 근처 홈스테이">Gió Nồm Homestay – Phòng gần biển Mỹ Khê, Đà Nẵng</title>
+<script src="../../assets/js/mau.js"></script>
+<meta name="description" content="Website mẫu do Chào Khách làm: homestay giả định gần biển Mỹ Khê, Đà Nẵng. Phòng và giá, tiện ích, vị trí, đặt phòng qua Zalo hoặc WhatsApp; có tiếng Việt, tiếng Anh, tiếng Hàn.">
+<!-- DEMO:BẮT ĐẦU — trang mẫu không cho Google index. Website thật của khách: xoá khối này. -->
+<meta name="robots" content="noindex">
+<!-- DEMO:KẾT THÚC -->
+<link rel="canonical" href="https://taibt-devops.github.io/dich-vu/mau/homestay/">
+<meta name="theme-color" content="#1e5f8c">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta property="og:site_name" content="Gió Nồm Homestay">
+<meta property="og:title" content="Gió Nồm Homestay (website mẫu) – gần biển Mỹ Khê">
+<meta property="og:description" content="Website mẫu song ngữ do Chào Khách làm: phòng, giá, tiện ích, đặt phòng qua Zalo hoặc WhatsApp. Bấm VI, EN, KO để đổi ngôn ngữ.">
+<meta property="og:url" content="https://taibt-devops.github.io/dich-vu/mau/homestay/">
+<meta property="og:image" content="https://taibt-devops.github.io/dich-vu/mau/homestay/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gió Nồm Homestay, website mẫu gần biển Mỹ Khê">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/mau.css">
+<style>
+  /* Màu và font riêng của trang này. Nhân bản cho khách: đổi các giá trị bên dưới. */
+  :root {
+    --bg: #fbf7f0;
+    --surface: #fff;
+    --text: #1f2a33;
+    --muted: #56636d;
+    --line: #e7ddcf;
+    --primary: #1e5f8c;
+    --primary-dark: #174a6d;
+    --accent: #f2a541;
+    --accent-soft: #fdf1dd;
+    --hero-from: #1b557d;
+    --hero-to: #2b77a0;
+    --font-heading: "Lora", Georgia, "Times New Roman";
+  }
+
+  .hero-sun {
+    position: absolute;
+    right: 8%;
+    bottom: clamp(1.6rem, 5vw, 4rem);
+    width: clamp(4rem, 14vw, 10rem);
+    height: auto;
+  }
+
+  .hero-art {
+    height: clamp(3.5rem, 9vw, 7rem);
+  }
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5z"/><path d="M8.5 9h7M8.5 12h4"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.4 7.6L3.5 21l1.4-4.5A8.5 8.5 0 1 1 20.5 12z"/><path d="M9.2 8.3h1.6l.8 2-1 .8a5 5 0 0 0 2.3 2.3l.8-1 2 .8v1.6c0 .4-.4.8-.8.8a6.6 6.6 0 0 1-6.5-6.5c0-.4.4-.8.8-.8z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 3.5h3l1.6 4.2-2.1 1.5a11 11 0 0 0 6.8 6.8l1.5-2.1 4.2 1.6v3a2 2 0 0 1-2 2A16.5 16.5 0 0 1 3.5 5.5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 1 1 13 0C18.5 15.2 12 21 12 21z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M3.5 9.5a12 12 0 0 1 17 0M6.5 12.7a7.5 7.5 0 0 1 11 0M9.5 15.8a3.2 3.2 0 0 1 5 0"/><path d="M12 19h.01"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="m9.5 4.5 2.5 2 2.5-2M9.5 19.5l2.5-2 2.5 2"/></symbol>
+  <symbol id="i-pot" viewBox="0 0 24 24"><path d="M4 10h16v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M2 10h2M20 10h2M8 6.5c0-1 1-1 1-2M12 6.5c0-1 1-1 1-2M16 6.5c0-1 1-1 1-2"/></symbol>
+  <symbol id="i-washer" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><circle cx="12" cy="13" r="4.5"/><path d="M7.5 6.5h.01M10.5 6.5h3"/></symbol>
+  <symbol id="i-scooter" viewBox="0 0 24 24"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7l1.5-6h-4.5M15 5h2.5l1.5 6.5M4 13c1.6-.9 3.4-.9 5 0"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 3c.8 0 1.5.7 1.5 1.5V10l7 4v2l-7-2v4l2 1.5V21L12 20l-3.5 1v-1.5l2-1.5v-4l-7 2v-2l7-4V4.5C10.5 3.7 11.2 3 12 3z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="13" rx="2.5"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M9 11v5M15 11v5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
+</svg>
+
+<!-- DEMO:BẮT ĐẦU — thanh báo "website mẫu" và nút về trang dịch vụ. Website thật: xoá khối này. -->
+<div class="demo-bar on-dark">
+  <div class="wrap">
+    <p><span lang="vi">Website mẫu, doanh nghiệp giả định.</span><span lang="en">Sample website, fictional business.</span><span lang="ko">샘플 웹사이트이며 실제 업체가 아닙니다.</span></p>
+    <a href="../../"><span lang="vi">Về trang dịch vụ Chào Khách</span><span lang="en">Back to Chào Khách</span><span lang="ko">Chào Khách 서비스 페이지로</span></a>
+  </div>
+</div>
+<!-- DEMO:KẾT THÚC -->
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1e5f8c"/><circle cx="16" cy="16" r="6.5" fill="#f2a541"/><path d="M4 20.5q3-2.5 6 0t6 0 6 0 6 0V26H4z" fill="#fbf7f0"/></svg>Gió Nồm Homestay</a>
+    <div class="lang-switch" role="group" aria-label="Ngôn ngữ / Language / 언어">
+      <button type="button" data-lang="vi" lang="vi" aria-label="Tiếng Việt" aria-pressed="true">VI</button>
+      <button type="button" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ko" lang="ko" aria-label="한국어" aria-pressed="false">KO</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero on-dark" aria-labelledby="tieu-de">
+    <div class="wrap">
+      <h1 id="tieu-de"><span lang="vi">Nhà nhỏ ấm cúng, 3 phút đi bộ ra biển Mỹ Khê</span><span lang="en">A cozy little home, 3 minutes’ walk to My Khe Beach</span><span lang="ko">미케 비치까지 걸어서 3분, 아늑한 작은 숙소</span></h1>
+      <p class="hero-lead"><span lang="vi">8 phòng sáng sủa, chủ nhà nói được tiếng Anh, có cho thuê xe máy và đón sân bay. Hợp cho cặp đôi, gia đình và khách ở dài ngày.</span><span lang="en">8 bright rooms, an English-speaking host, scooter rental and airport pickup. Great for couples, families and long stays.</span><span lang="ko">밝은 객실 8개, 영어가 통하는 호스트, 오토바이 대여와 공항 픽업까지. 커플, 가족, 장기 숙박에 잘 맞아요.</span></p>
+      <div class="hero-actions">
+        <a class="btn btn-light" href="https://zalo.me/DIEN_SO_ZALO"><svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg><span lang="vi">Đặt phòng qua Zalo</span><span lang="en">Book on Zalo</span><span lang="ko">Zalo로 예약하기</span></a>
+        <a class="btn btn-outline-light" href="#phong"><span lang="vi">Xem phòng và giá</span><span lang="en">See rooms &amp; rates</span><span lang="ko">객실과 요금 보기</span></a>
+      </div>
+    </div>
+    <svg class="hero-sun" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#f2a541"/></svg>
+    <svg class="hero-art" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 40C150 10 300 70 450 40S750 10 900 40s200 30 300 0v80H0z" fill="#fff" opacity=".14"/>
+      <path d="M0 70C150 40 300 100 450 70S750 40 900 70s200 30 300 0v50H0z" fill="#fff" opacity=".22"/>
+      <path class="wave-bg" d="M0 96C150 76 300 116 450 96S750 76 900 96s200 20 300 0v24H0z"/>
+    </svg>
+  </section>
+
+  <section id="gioi-thieu" class="section" aria-labelledby="gioi-thieu-tieu-de">
+    <div class="wrap intro">
+      <div class="photo photo-wide"><span lang="vi">Ảnh của bạn ở đây</span><span lang="en">Your photo here</span><span lang="ko">여기에 사진을 넣으세요</span></div>
+      <div class="intro-text">
+        <h2 id="gioi-thieu-tieu-de"><span lang="vi">Về Gió Nồm</span><span lang="en">About Gió Nồm</span><span lang="ko">Gió Nồm 소개</span></h2>
+        <p><span lang="vi">Gió Nồm là ngôi nhà ba tầng của gia đình chúng tôi, nằm trong một con hẻm yên tĩnh cách biển Mỹ Khê 250 m. Sáng sớm bạn đi bộ ra biển ngắm bình minh, tối dạo chợ đêm và các quán hải sản gần nhà.</span><span lang="en">Gió Nồm is our family’s three-storey home on a quiet lane, 250 m from My Khe Beach. Walk to the sea for sunrise, then spend the evening at the night market and seafood places nearby.</span><span lang="ko">Gió Nồm은 미케 비치에서 250m 떨어진 조용한 골목에 있는 3층짜리 가족 숙소예요. 아침에는 바다까지 걸어가 일출을 보고, 저녁에는 근처 야시장과 해산물 식당을 즐겨 보세요.</span></p>
+        <dl class="facts">
+          <div><dt><span lang="vi">Nhận phòng</span><span lang="en">Check-in</span><span lang="ko">체크인</span></dt><dd><span lang="vi">từ 14:00</span><span lang="en">from 2 pm</span><span lang="ko">14:00부터</span></dd></div>
+          <div><dt><span lang="vi">Trả phòng</span><span lang="en">Check-out</span><span lang="ko">체크아웃</span></dt><dd><span lang="vi">trước 12:00</span><span lang="en">by noon</span><span lang="ko">12:00까지</span></dd></div>
+          <div><dt><span lang="vi">Ngôn ngữ</span><span lang="en">Languages</span><span lang="ko">언어</span></dt><dd><span lang="vi">Tiếng Việt, tiếng Anh</span><span lang="en">Vietnamese, English</span><span lang="ko">베트남어, 영어</span></dd></div>
+          <div><dt><span lang="vi">Thanh toán</span><span lang="en">Payment</span><span lang="ko">결제</span></dt><dd><span lang="vi">Tiền mặt, chuyển khoản</span><span lang="en">Cash, bank transfer</span><span lang="ko">현금, 계좌이체</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="phong" class="section section-alt" aria-labelledby="phong-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="phong-tieu-de"><span lang="vi">Phòng và giá</span><span lang="en">Rooms &amp; rates</span><span lang="ko">객실과 요금</span></h2>
+        <p><span lang="vi">Giá mỗi đêm, đã gồm thuế phí. Ở từ 7 đêm được giảm 10%.</span><span lang="en">Prices are per night, taxes included. Stay 7 nights or more and get 10% off.</span><span lang="ko">1박 요금이며 세금이 포함되어 있어요. 7박 이상 머무르시면 10% 할인해 드려요.</span></p>
+      </div>
+      <ul class="cards">
+        <li class="card">
+          <div class="photo"><span lang="vi">Ảnh của bạn ở đây</span><span lang="en">Your photo here</span><span lang="ko">여기에 사진을 넣으세요</span></div>
+          <div class="card-body">
+            <h3><span lang="vi">Phòng đôi tiêu chuẩn</span><span lang="en">Standard Double</span><span lang="ko">스탠다드 더블룸</span></h3>
+            <ul class="chips">
+              <li><span lang="vi">2 khách</span><span lang="en">2 guests</span><span lang="ko">2인</span></li>
+              <li>20 m²</li>
+              <li><span lang="vi">1 giường đôi</span><span lang="en">1 double bed</span><span lang="ko">더블 침대 1개</span></li>
+            </ul>
+            <p class="card-text"><span lang="vi">Cửa sổ lớn, máy lạnh, phòng tắm riêng có nước nóng.</span><span lang="en">Large window, air conditioning, private bathroom with hot water.</span><span lang="ko">큰 창문, 에어컨, 온수가 나오는 개별 욕실.</span></p>
+            <div class="card-foot">
+              <p class="price"><strong>550.000₫</strong> <span lang="vi">/ đêm</span><span lang="en">/ night</span><span lang="ko">/ 1박</span></p>
+              <a class="btn btn-outline btn-small" href="#dat-phong"><span lang="vi">Đặt phòng này</span><span lang="en">Book this room</span><span lang="ko">이 객실 예약</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="card">
+          <div class="photo"><span lang="vi">Ảnh của bạn ở đây</span><span lang="en">Your photo here</span><span lang="ko">여기에 사진을 넣으세요</span></div>
+          <div class="card-body">
+            <h3><span lang="vi">Phòng đôi có ban công</span><span lang="en">Balcony Double</span><span lang="ko">발코니 더블룸</span></h3>
+            <ul class="chips">
+              <li><span lang="vi">2 khách</span><span lang="en">2 guests</span><span lang="ko">2인</span></li>
+              <li>25 m²</li>
+              <li><span lang="vi">1 giường đôi</span><span lang="en">1 double bed</span><span lang="ko">더블 침대 1개</span></li>
+            </ul>
+            <p class="card-text"><span lang="vi">Ban công nhìn ra phố, có bàn nhỏ để uống cà phê buổi sáng.</span><span lang="en">Balcony over the street with a small table for your morning coffee.</span><span lang="ko">거리가 보이는 발코니에 아침 커피를 즐길 작은 테이블이 있어요.</span></p>
+            <div class="card-foot">
+              <p class="price"><strong>700.000₫</strong> <span lang="vi">/ đêm</span><span lang="en">/ night</span><span lang="ko">/ 1박</span></p>
+              <a class="btn btn-outline btn-small" href="#dat-phong"><span lang="vi">Đặt phòng này</span><span lang="en">Book this room</span><span lang="ko">이 객실 예약</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="card">
+          <div class="photo"><span lang="vi">Ảnh của bạn ở đây</span><span lang="en">Your photo here</span><span lang="ko">여기에 사진을 넣으세요</span></div>
+          <div class="card-body">
+            <h3><span lang="vi">Phòng gia đình</span><span lang="en">Family Room</span><span lang="ko">패밀리룸</span></h3>
+            <ul class="chips">
+              <li><span lang="vi">4 khách</span><span lang="en">4 guests</span><span lang="ko">4인</span></li>
+              <li>35 m²</li>
+              <li><span lang="vi">2 giường đôi</span><span lang="en">2 double beds</span><span lang="ko">더블 침대 2개</span></li>
+            </ul>
+            <p class="card-text"><span lang="vi">Rộng rãi cho gia đình có trẻ nhỏ, có tủ lạnh và ấm siêu tốc.</span><span lang="en">Plenty of space for families with kids, with a fridge and an electric kettle.</span><span lang="ko">아이가 있는 가족도 넉넉한 공간에 냉장고와 전기포트가 있어요.</span></p>
+            <div class="card-foot">
+              <p class="price"><strong>1.100.000₫</strong> <span lang="vi">/ đêm</span><span lang="en">/ night</span><span lang="ko">/ 1박</span></p>
+              <a class="btn btn-outline btn-small" href="#dat-phong"><span lang="vi">Đặt phòng này</span><span lang="en">Book this room</span><span lang="ko">이 객실 예약</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="card">
+          <div class="photo"><span lang="vi">Ảnh của bạn ở đây</span><span lang="en">Your photo here</span><span lang="ko">여기에 사진을 넣으세요</span></div>
+          <div class="card-body">
+            <h3><span lang="vi">Studio có bếp</span><span lang="en">Studio with Kitchenette</span><span lang="ko">주방 딸린 스튜디오</span></h3>
+            <ul class="chips">
+              <li><span lang="vi">2 khách</span><span lang="en">2 guests</span><span lang="ko">2인</span></li>
+              <li>30 m²</li>
+              <li><span lang="vi">Bếp riêng</span><span lang="en">Own kitchen</span><span lang="ko">전용 주방</span></li>
+            </ul>
+            <p class="card-text"><span lang="vi">Có bếp nhỏ và máy giặt riêng, hợp cho khách ở dài ngày hoặc làm việc từ xa.</span><span lang="en">Kitchenette and private washing machine, ideal for long stays and remote work.</span><span lang="ko">작은 주방과 전용 세탁기가 있어 장기 숙박이나 원격 근무에 좋아요.</span></p>
+            <div class="card-foot">
+              <p class="price"><strong>850.000₫</strong> <span lang="vi">/ đêm</span><span lang="en">/ night</span><span lang="ko">/ 1박</span></p>
+              <a class="btn btn-outline btn-small" href="#dat-phong"><span lang="vi">Đặt phòng này</span><span lang="en">Book this room</span><span lang="ko">이 객실 예약</span></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="tien-ich" class="section" aria-labelledby="tien-ich-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="tien-ich-tieu-de"><span lang="vi">Tiện ích</span><span lang="en">Amenities</span><span lang="ko">편의시설</span></h2>
+      </div>
+      <ul class="amenities">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-wifi"></use></svg><span><span lang="vi">Wi-Fi miễn phí</span><span lang="en">Free Wi-Fi</span><span lang="ko">무료 와이파이</span></span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-snow"></use></svg><span><span lang="vi">Máy lạnh mọi phòng</span><span lang="en">Air conditioning</span><span lang="ko">전 객실 에어컨</span></span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-pot"></use></svg><span><span lang="vi">Bếp chung</span><span lang="en">Shared kitchen</span><span lang="ko">공용 주방</span></span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-washer"></use></svg><span><span lang="vi">Máy giặt</span><span lang="en">Washing machine</span><span lang="ko">세탁기</span></span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-scooter"></use></svg><span><span lang="vi">Cho thuê xe máy</span><span lang="en">Scooter rental</span><span lang="ko">오토바이 대여</span></span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-plane"></use></svg><span><span lang="vi">Đón sân bay (phụ phí)</span><span lang="en">Airport pickup (extra fee)</span><span lang="ko">공항 픽업 (추가 요금)</span></span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-bag"></use></svg><span><span lang="vi">Giữ hành lý miễn phí</span><span lang="en">Free luggage storage</span><span lang="ko">무료 짐 보관</span></span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-sun"></use></svg><span><span lang="vi">Sân thượng</span><span lang="en">Rooftop terrace</span><span lang="ko">루프탑 테라스</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="vi-tri" class="section section-alt" aria-labelledby="vi-tri-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="vi-tri-tieu-de"><span lang="vi">Vị trí</span><span lang="en">Location</span><span lang="ko">위치</span></h2>
+      </div>
+      <div class="location">
+        <div>
+          <address class="address"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span><span lang="vi">Hẻm gần đường ven biển, khu biển Mỹ Khê, Đà Nẵng (địa chỉ mẫu)</span><span lang="en">A lane off the beach road, My Khe Beach area, Da Nang (sample address)</span><span lang="ko">다낭 미케 비치 해변도로 근처 골목 (예시 주소)</span></span></address>
+          <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=My%20Khe%20Beach%2C%20Da%20Nang"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span lang="vi">Mở Google Maps</span><span lang="en">Open in Google Maps</span><span lang="ko">구글 지도에서 보기</span></a>
+        </div>
+        <ul class="distances">
+          <li><span><span lang="vi">Biển Mỹ Khê</span><span lang="en">My Khe Beach</span><span lang="ko">미케 비치</span></span><span>250 m <span lang="vi">(3 phút đi bộ)</span><span lang="en">(3-minute walk)</span><span lang="ko">(도보 3분)</span></span></li>
+          <li><span><span lang="vi">Chợ đêm Sơn Trà</span><span lang="en">Son Tra Night Market</span><span lang="ko">선짜 야시장</span></span><span>2 km</span></li>
+          <li><span><span lang="vi">Cầu Rồng</span><span lang="en">Dragon Bridge</span><span lang="ko">용다리</span></span><span>3 km <span lang="vi">(10 phút đi xe)</span><span lang="en">(10 min by car)</span><span lang="ko">(차로 10분)</span></span></li>
+          <li><span><span lang="vi">Sân bay Đà Nẵng</span><span lang="en">Da Nang Airport</span><span lang="ko">다낭 공항</span></span><span>6 km <span lang="vi">(15 phút đi xe)</span><span lang="en">(15 min by car)</span><span lang="ko">(차로 15분)</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="dat-phong" class="section" aria-labelledby="dat-phong-tieu-de">
+    <div class="wrap">
+      <div class="booking">
+        <div>
+          <h2 id="dat-phong-tieu-de"><span lang="vi">Đặt phòng</span><span lang="en">Book a room</span><span lang="ko">예약하기</span></h2>
+          <p class="note"><span lang="vi">Nhắn cho chúng tôi để giữ phòng. Thường trả lời trong 30 phút, từ 7:00 đến 22:00.</span><span lang="en">Message us to hold a room. We usually reply within 30 minutes, 7 am to 10 pm.</span><span lang="ko">메시지를 보내 주시면 객실을 잡아 드려요. 보통 30분 안에 답장드려요 (오전 7시~오후 10시).</span></p>
+        </div>
+        <ol class="booking-steps">
+          <li><span lang="vi">Gửi ngày nhận phòng và số đêm</span><span lang="en">Send your check-in date and number of nights</span><span lang="ko">체크인 날짜와 숙박일수를 보내 주세요</span></li>
+          <li><span lang="vi">Cho biết số khách và loại phòng muốn ở</span><span lang="en">Tell us how many guests and which room you like</span><span lang="ko">인원과 원하시는 객실을 알려 주세요</span></li>
+          <li><span lang="vi">Chúng tôi xác nhận phòng trống và giá</span><span lang="en">We confirm availability and the price</span><span lang="ko">빈 객실과 요금을 확인해 드려요</span></li>
+        </ol>
+        <div class="book-buttons">
+          <a class="btn btn-zalo" href="https://zalo.me/DIEN_SO_ZALO"><svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg><span lang="vi">Nhắn Zalo</span><span lang="en">Message on Zalo</span><span lang="ko">Zalo로 메시지</span></a>
+          <a class="btn btn-whatsapp" lang="vi" href="https://wa.me/DIEN_SO_QUOC_TE?text=Xin%20chào%20Gió%20Nồm,%20tôi%20muốn%20đặt%20phòng"><svg class="icon" aria-hidden="true"><use href="#i-wa"></use></svg>WhatsApp</a>
+          <a class="btn btn-whatsapp" lang="en" href="https://wa.me/DIEN_SO_QUOC_TE?text=Hello%20Gió%20Nồm,%20I%20would%20like%20to%20book%20a%20room"><svg class="icon" aria-hidden="true"><use href="#i-wa"></use></svg>WhatsApp</a>
+          <a class="btn btn-whatsapp" lang="ko" href="https://wa.me/DIEN_SO_QUOC_TE?text=안녕하세요%20Gió%20Nồm,%20방을%20예약하고%20싶어요"><svg class="icon" aria-hidden="true"><use href="#i-wa"></use></svg>WhatsApp</a>
+          <a class="btn btn-call" href="tel:+DIEN_SO_QUOC_TE"><svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg><span lang="vi">Gọi&nbsp;điện</span><span lang="en">Call&nbsp;us</span><span lang="ko">전화하기</span></a>
+        </div>
+        <!-- DEMO:BẮT ĐẦU — ghi chú chỉ dành cho trang mẫu. Website thật: xoá khối này. -->
+        <p class="demo-note"><span lang="vi">Trên website mẫu, các nút này mở Zalo, WhatsApp của Chào Khách. Website thật sẽ mở đúng tài khoản của tiệm bạn.</span><span lang="en">On this sample the buttons open Chào Khách’s own Zalo and WhatsApp. A real site opens the business’s accounts.</span><span lang="ko">샘플 사이트에서는 버튼이 Chào Khách의 Zalo와 WhatsApp으로 연결돼요. 실제 사이트에서는 업체 계정으로 연결됩니다.</span></p>
+        <!-- DEMO:KẾT THÚC -->
+      </div>
+    </div>
+  </section>
+
+  <section id="danh-gia" class="section section-alt" aria-labelledby="danh-gia-tieu-de">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="danh-gia-tieu-de"><span lang="vi">Khách nói gì</span><span lang="en">What guests say</span><span lang="ko">투숙객 후기</span></h2>
+        <p class="sample-tag"><span lang="vi">Đánh giá minh hoạ, người và lời nhận xét đều là giả định</span><span lang="en">Sample reviews: names and comments are fictional</span><span lang="ko">예시 후기이며 이름과 내용은 가상입니다</span></p>
+      </div>
+      <ul class="reviews">
+        <li>
+          <figure class="review">
+            <p class="stars" role="img" aria-label="5/5">★★★★★</p>
+            <blockquote><p><span lang="vi">Phòng sạch, đi bộ ra biển rất gần. Chị chủ nhà nhiệt tình chỉ cho chỗ ăn ngon.</span><span lang="en">Clean room and the beach is a short walk away. The host kindly pointed us to great places to eat.</span><span lang="ko">방이 깨끗하고 바다까지 금방이에요. 호스트분이 맛집도 친절하게 알려 주셨어요.</span></p></blockquote>
+            <figcaption><span lang="vi">Minh Anh, Hà Nội</span><span lang="en">Minh Anh, Hanoi</span><span lang="ko">Minh Anh, 하노이</span></figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="review">
+            <p class="stars" role="img" aria-label="5/5">★★★★★</p>
+            <blockquote><p><span lang="vi">Con hẻm yên tĩnh, giường êm, thuê xe máy ngay tại nhà nên đi đâu cũng tiện.</span><span lang="en">A quiet lane, a comfy bed, and renting a scooter right at the house made getting around easy.</span><span lang="ko">조용한 골목에 침대도 편하고, 숙소에서 바로 오토바이를 빌릴 수 있어 이동이 편했어요.</span></p></blockquote>
+            <figcaption><span lang="vi">Emma, Úc</span><span lang="en">Emma, Australia</span><span lang="ko">엠마, 호주</span></figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="review">
+            <p class="stars" role="img" aria-label="5/5">★★★★★</p>
+            <blockquote><p><span lang="vi">Đón sân bay đúng giờ, phòng gia đình rộng, ở cùng các con rất thoải mái.</span><span lang="en">The airport pickup was right on time and the family room was spacious. Easy stay with the kids.</span><span lang="ko">공항 픽업이 정확했고 패밀리룸이 넓어서 아이들과 지내기 편했어요.</span></p></blockquote>
+            <figcaption><span lang="vi">Ji-hoon, Seoul</span><span lang="en">Ji-hoon, Seoul</span><span lang="ko">지훈, 서울</span></figcaption>
+          </figure>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot on-dark">
+  <div class="wrap">
+    <p class="foot-brand">Gió Nồm Homestay</p>
+    <p><span lang="vi">Khu biển Mỹ Khê, Đà Nẵng. Nhận khách hằng ngày từ 7:00 đến 22:00.</span><span lang="en">My Khe Beach area, Da Nang. Reception open daily 7 am to 10 pm.</span><span lang="ko">다낭 미케 비치 지역. 매일 오전 7시~오후 10시 응대.</span></p>
+    <ul class="foot-links">
+      <li><a href="https://zalo.me/DIEN_SO_ZALO">Zalo</a></li>
+      <li><a href="https://wa.me/DIEN_SO_QUOC_TE">WhatsApp</a></li>
+      <li><a href="#phong"><span lang="vi">Phòng và giá</span><span lang="en">Rooms &amp; rates</span><span lang="ko">객실과 요금</span></a></li>
+    </ul>
+    <!-- DEMO:BẮT ĐẦU — dòng ghi công cho trang mẫu. Website thật: xoá hoặc giữ tuỳ thoả thuận với khách. -->
+    <p class="foot-demo"><span lang="vi">Doanh nghiệp giả định. Website mẫu do</span><span lang="en">Fictional business. Sample website by</span><span lang="ko">가상의 업체입니다. 샘플 웹사이트 제작:</span> <a href="../../">Chào Khách</a></p>
+    <!-- DEMO:KẾT THÚC -->
+  </div>
+</footer>
+</body>
+</html>

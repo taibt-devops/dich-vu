@@ -1,0 +1,803 @@
+/* Chào Khách: CSS dùng chung cho các trang mẫu (mau/homestay, mau/spa, mau/menu).
+   Mỗi trang đặt màu và font riêng bằng cách khai báo lại các biến ở :root trong thẻ <style>
+   nằm SAU dòng nạp file này. Không cần sửa file này khi nhân bản cho khách. */
+
+:root {
+  --bg: #fbf7f0;            /* nền trang */
+  --surface: #fff;          /* nền thẻ */
+  --text: #1f2a33;          /* chữ */
+  --muted: #56636d;         /* chữ phụ */
+  --line: #e7ddcf;          /* viền */
+  --primary: #1e5f8c;       /* màu chính: nút, link */
+  --primary-dark: #174a6d;
+  --on-primary: #fff;
+  --accent: #f2a541;        /* màu nhấn: trang trí, sao đánh giá */
+  --accent-soft: #fdf1dd;
+  --hero-from: #1e5f8c;     /* nền đầu trang, chữ trắng nằm trên nên phải đủ tối */
+  --hero-to: #2b77a0;
+  --font-heading: Georgia, "Times New Roman";
+  --font-ko: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic";
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --radius: 14px;
+  --wrap: 66rem;
+  --gutter: clamp(1rem, 5vw, 2rem);
+
+  --zalo: #0068ff;
+  --whatsapp: #0a7d58;
+  --kakao: #fee500;
+  --kakao-text: #191600;
+  color-scheme: light;
+}
+
+/* ---------- Ngôn ngữ: chỉ hiện phần trùng với <html lang> (mau.js đổi lang) ---------- */
+html[lang="vi"] body [lang="en"]:not(button),
+html[lang="vi"] body [lang="ko"]:not(button),
+html[lang="en"] body [lang="vi"]:not(button),
+html[lang="en"] body [lang="ko"]:not(button),
+html[lang="ko"] body [lang="vi"]:not(button),
+html[lang="ko"] body [lang="en"]:not(button) {
+  display: none !important;
+}
+
+:lang(ko) {
+  word-break: keep-all;
+}
+
+/* ---------- Nền tảng ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1.125rem/1.6 var(--font-body), var(--font-ko), sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-heading), var(--font-ko), serif;
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+p,
+ul,
+ol,
+dl,
+dd,
+figure,
+blockquote {
+  margin: 0;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--primary);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 2px;
+}
+
+.on-dark :focus-visible {
+  outline-color: #fff;
+}
+
+[id] {
+  scroll-margin-top: 5rem;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icon {
+  display: inline-block;
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+}
+
+/* ---------- Thanh "website mẫu" (chỉ có ở trang mẫu, xoá khi làm website thật) ---------- */
+.demo-bar {
+  background: #1f2a33;
+  color: #eef0ea;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.demo-bar .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.5rem;
+}
+
+.demo-bar a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.2rem 0.85rem;
+  border: 1px solid rgb(255 255 255 / 0.5);
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.demo-bar a:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.demo-note {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: 0.9375rem;
+}
+
+/* ---------- Đầu trang (dính trên cùng khi cuộn) ---------- */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.top .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 3.75rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text);
+  font-family: var(--font-heading), var(--font-ko), serif;
+  font-size: clamp(1rem, 0.85rem + 0.8vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.brand svg {
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
+.lang-switch {
+  display: inline-flex;
+  flex: none;
+  padding: 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.lang-switch button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 0.55rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: 700 0.9375rem/1 var(--font-body), sans-serif;
+  cursor: pointer;
+}
+
+.lang-switch button[aria-pressed="true"] {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--hero-from), var(--hero-to));
+  color: #fff;
+}
+
+.hero .wrap {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(2.5rem, 8vw, 5rem) clamp(6rem, 16vw, 9rem);
+}
+
+.hero h1 {
+  max-width: 20ch;
+  font-size: clamp(2rem, 1.25rem + 3.4vw, 3.4rem);
+  letter-spacing: -0.01em;
+}
+
+.hero-lead {
+  max-width: 36rem;
+  margin-top: 1rem;
+  font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.hero-art {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.hero-art .wave-bg {
+  fill: var(--bg);
+}
+
+@media (max-width: 559px) {
+  .hero-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Khung ảnh: thay bằng <img> thật khi làm cho khách ---------- */
+.photo {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.4rem;
+  aspect-ratio: 4 / 3;
+  padding: 1rem;
+  border: 1px dashed color-mix(in srgb, var(--text) 28%, transparent);
+  border-radius: var(--radius);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 10%, var(--surface)) 0 14px,
+      color-mix(in srgb, var(--accent) 18%, var(--surface)) 14px 28px
+    );
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.photo::before {
+  width: 2rem;
+  height: 2rem;
+  background: currentColor;
+  content: "";
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8h3l1.5-2.5h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z'/%3E%3Ccircle cx='12' cy='13' r='3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8h3l1.5-2.5h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z'/%3E%3Ccircle cx='12' cy='13' r='3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.photo-wide {
+  aspect-ratio: 16 / 9;
+}
+
+img.photo {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  border: 0;
+}
+
+/* ---------- Mục ---------- */
+.section {
+  padding-block: clamp(3rem, 8vw, 5rem);
+}
+
+.section-alt {
+  background: color-mix(in srgb, var(--accent) 9%, var(--bg));
+}
+
+.section-head {
+  max-width: 42rem;
+  margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.section-head h2 {
+  font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.25rem);
+}
+
+.section-head p {
+  margin-top: 0.6rem;
+  color: var(--muted);
+}
+
+.intro {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: center;
+}
+
+.intro-text h2 {
+  margin-bottom: 0.75rem;
+}
+
+.intro-text p + p {
+  margin-top: 0.9rem;
+}
+
+@media (min-width: 860px) {
+  .intro {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.facts div {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.facts dt {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.facts dd {
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* ---------- Thẻ (phòng, dịch vụ) ---------- */
+.cards {
+  display: grid;
+  gap: 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.card .photo {
+  aspect-ratio: 3 / 2;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+}
+
+.card-body {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  gap: 0.65rem;
+  padding: 1.1rem 1.25rem 1.25rem;
+}
+
+.card h3 {
+  font-size: 1.375rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-size: 0.9375rem;
+}
+
+.card-text {
+  color: var(--muted);
+}
+
+.card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+
+.price {
+  color: var(--muted);
+}
+
+.price strong {
+  color: var(--text);
+  font-size: 1.375rem;
+  white-space: nowrap;
+}
+
+.note {
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+@media (min-width: 700px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Tiện ích ---------- */
+.amenities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.amenities li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  line-height: 1.35;
+}
+
+.amenities .icon {
+  color: var(--primary);
+}
+
+@media (min-width: 760px) {
+  .amenities {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- Vị trí ---------- */
+.location {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.address {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 1.1rem;
+  font-style: normal;
+}
+
+.address .icon {
+  margin-top: 0.15rem;
+  color: var(--primary);
+}
+
+.distances {
+  display: grid;
+  padding: 0;
+  list-style: none;
+}
+
+.distances li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  justify-content: space-between;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.distances li > span:last-child {
+  color: var(--muted);
+}
+
+.location .btn {
+  justify-self: start;
+}
+
+@media (min-width: 860px) {
+  .location {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ---------- Nút ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3.25rem;
+  padding: 0.7rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font: 700 1.0625rem/1.2 var(--font-body), var(--font-ko), sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn .icon {
+  width: 1.35em;
+  height: 1.35em;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  color: var(--on-primary);
+}
+
+.btn-light {
+  background: #fff;
+  color: var(--primary-dark);
+}
+
+.btn-light:hover {
+  background: var(--accent-soft);
+  color: var(--primary-dark);
+}
+
+.btn-outline {
+  border-color: currentColor;
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--accent-soft);
+}
+
+.btn-outline-light {
+  border-color: rgb(255 255 255 / 0.85);
+  color: #fff;
+}
+
+.btn-outline-light:hover {
+  background: rgb(255 255 255 / 0.12);
+  color: #fff;
+}
+
+.btn-small {
+  min-height: 2.75rem;
+  padding: 0.45rem 1rem;
+  font-size: 1rem;
+}
+
+.btn-zalo {
+  background: var(--zalo);
+  color: #fff;
+}
+
+.btn-whatsapp {
+  background: var(--whatsapp);
+  color: #fff;
+}
+
+.btn-kakao {
+  background: var(--kakao);
+  color: var(--kakao-text);
+}
+
+.btn-zalo:hover,
+.btn-whatsapp:hover,
+.btn-kakao:hover {
+  filter: brightness(0.93);
+}
+
+.btn-zalo:hover,
+.btn-whatsapp:hover {
+  color: #fff;
+}
+
+.btn-kakao:hover {
+  color: var(--kakao-text);
+}
+
+.btn-call {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.btn-call:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+/* ---------- Đặt chỗ ---------- */
+.booking {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) * 1.4);
+  background: var(--surface);
+}
+
+.booking h2 {
+  font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.25rem);
+}
+
+.booking-steps {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1.4rem;
+}
+
+.booking-steps li::marker {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.book-buttons {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .book-buttons {
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  }
+}
+
+/* ---------- Đánh giá ---------- */
+.reviews {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.review {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.stars {
+  color: var(--accent);
+  font-size: 1.125rem;
+  letter-spacing: 0.12em;
+}
+
+.review figcaption {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.sample-tag {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.2rem 0.75rem;
+  border: 1px dashed var(--muted);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (min-width: 860px) {
+  .reviews {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Chân trang ---------- */
+.foot {
+  padding-block: 2.25rem 2.75rem;
+  background: var(--text);
+  color: rgb(255 255 255 / 0.86);
+  font-size: 1rem;
+}
+
+.foot .wrap {
+  display: grid;
+  gap: 1rem;
+}
+
+.foot-brand {
+  color: #fff;
+  font-family: var(--font-heading), var(--font-ko), serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.foot a {
+  color: #fff;
+}
+
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.foot-demo {
+  padding-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 0.2);
+  font-size: 0.9375rem;
+}
